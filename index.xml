@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home on Alberto Pastorutti</title>
+    <link>https://apasto.github.io/</link>
+    <description>Recent content in Home on Alberto Pastorutti</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 06 Nov 2022 20:36:52 +0100</lastBuildDate>
+    <atom:link href="https://apasto.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A tool to isolate locally correlated signals between two arrays</title>
+      <link>https://apasto.github.io/a-tool-to-isolate-locally-correlated-signals-between-two-arrays/</link>
+      <pubDate>Sun, 06 Nov 2022 20:36:52 +0100</pubDate>
+      <guid>https://apasto.github.io/a-tool-to-isolate-locally-correlated-signals-between-two-arrays/</guid>
+      <description>Consider some image-like data (in the form of a &amp;ldquo;grid&amp;rdquo;, a labelled 2-D array) which can be explained at least in part by another observable. Suppose that this relationship is linear - or can be approximated as such - and varies spatially, with a spatial scale that is larger than the grid interval. Pending some other assumptions, we can invert this relationship in discrete windows: a rolling 2-D linear regression.</description>
+    </item>
+    <item>
+      <title>RSS feed to a dot matrix printer</title>
+      <link>https://apasto.github.io/rss-feed-to-a-dot-matrix-printer/</link>
+      <pubDate>Tue, 07 Oct 2014 14:00:00 +0200</pubDate>
+      <guid>https://apasto.github.io/rss-feed-to-a-dot-matrix-printer/</guid>
+      <description>I am pre-dating this post with its original date, from 2014. It has been migrated from an old blog of mine (now a dead link). This has been a fun, rather noisy project. Not much to showcase, but I cannot find any reason to get rid of it either.&#xA;A bash script to turn an RSS news feed in escape-formatted dot-matrix printer text. Or: a questionable waste of time, continuous-form paper, and ink ribbon.</description>
+    </item>
+  </channel>
+</rss>
