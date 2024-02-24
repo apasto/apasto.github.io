@@ -20,7 +20,7 @@
       <link>https://apasto.github.io/rss-feed-to-a-dot-matrix-printer/</link>
       <pubDate>Tue, 07 Oct 2014 14:00:00 +0200</pubDate>
       <guid>https://apasto.github.io/rss-feed-to-a-dot-matrix-printer/</guid>
-      <description>I am pre-dating this post with its original date, from 2014. It has been migrated from an old blog of mine (now a dead link). This has been a fun, rather noisy project. Not much to showcase, but I cannot find any reason to get rid of it either.&#xA;A bash script to turn an RSS news feed in escape-formatted dot-matrix printer text. Or: a questionable waste of time, continuous-form paper, and ink ribbon.</description>
+      <description>This little project has turned out as fun as it&amp;rsquo;s been noisy (rather). Not much to showcase, but I cannot find any reason to get rid of it either.&#xA;A bash script to turn an RSS news feed in escape-formatted dot-matrix printer text. Or: a questionable waste of time, continuous-form paper, and ink ribbon.&#xA;Description Quoting the video caption:&#xA;Those escape sequences that look like line noise are Epson ESC/P control codes, to which my printer (a Citizen 120D+) is partially compliant.</description>
     </item>
   </channel>
 </rss>
