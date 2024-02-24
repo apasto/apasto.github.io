@@ -1,1 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="apasto short notes">
+    
+    <link rel="shortcut icon" href="https://apasto.github.io/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.min.css">
 
+    <link rel="canonical" href="https://apasto.github.io/a-tool-to-isolate-locally-correlated-signals-between-two-arrays/" />
+    <title>A tool to isolate locally correlated signals between two arrays</title>
+</head>
+<body><header id="banner">
+    <h2><a href="https://apasto.github.io/">Alberto Pastorutti</a></h2>
+    <nav>
+        <ul>
+            <li>
+                <a href="/" title="posts">posts</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main id="content">
+<article>
+    <header id="post-header">
+        <h1>A tool to isolate locally correlated signals between two arrays</h1>
+        <div>
+                <time>November 6, 2022</time>
+            </div>
+    </header><p><img src="/img/logo_linreg.png" alt="decorrelate-grids logo"></p>
+<p>Consider some image-like data (in the form of a &ldquo;grid&rdquo;, a labelled 2-D array) which can be explained at least in part by another observable.
+Suppose that this relationship is linear - or can be approximated as such - and varies spatially, with a spatial scale that is larger than the grid interval.
+Pending some other assumptions, we can invert this relationship in discrete windows: a <em>rolling 2-D linear regression</em>.</p>
+<p>The resulting fit, in the form of an array of regression results, can be then subtracted from our original data, ideally isolating our signal of interest with no contribution from the explanatory variable.</p>
+<p>This was designed with reduction of atmospheric delay in InSAR interferometric couples, which has a topography-dependent component.
+The method, however, can be trivially generalised to other applications - after all its nature is far from complex.
+All due credits for the idea to my colleague <a href="https://github.com/marbarto">Marco Bartola</a> - as of November 2022 a PhD candidate in the <a href="https://sites.units.it/geodin/">research unit I am doing a postdoc in</a> - and to lots of inspiring conversations with him.</p>
+<p>From the beginning, implementing this sounded quite fun to me, so after quickly setting up a working example for his project work I took it on as a spare-time collateral.
+This seemed a good opportunity to write a Python module and learn how to package it, while working on it at a slower pace - something which is unlikely to happen with my own research work.
+It is fun, and strict-sense fun should have no deadlines, even if I am doing it to incidentally learn something.</p>
+<p>While I could not find anything ready made already available (if that is not the case, let me know!), the idea on its own is not novel. Some specific application could be novel, indeed, thus let&rsquo;s hope this turns helpful for someone else&rsquo;s purposes.</p>
+<p>At the current &ldquo;concept stage&rdquo; (let&rsquo;s tag it as <a href="https://github.com/apasto/decorrelate-grids/releases/tag/v0.1.0-alpha">v0.0.1-alpha</a>) it is a working prototype.
+Clone it, create its conda environment, and call it as a shell script.
+A help printout for arguments (using <a href="https://docs.python.org/3/library/argparse.html">argparse</a>) can be accessed with flag -h.
+Being a prototype, the next changes are likely to break current behaviour and syntax.</p>
+<p>Head over to the repository for any further information: <a href="https://github.com/apasto/decorrelate-grids">apasto/decorrelate-grids</a>.</p>
+</article>
+<h4>Tags:</h4>
+ 
+<ul>
+   <li>
+    <a href="https://apasto.github.io/tags/decorrelate-grids/">decorrelate-grids</a>
+  </li> <li>
+    <a href="https://apasto.github.io/tags/insar/">insar</a>
+  </li> <li>
+    <a href="https://apasto.github.io/tags/remote-sensing/">remote-sensing</a>
+  </li></ul>
+
+
+
+        </main><footer id="footer">
+    Copyright © 2024 Alberto Pastorutti &middot; 
+</footer>
+</body>
+</html>

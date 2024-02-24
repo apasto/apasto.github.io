@@ -7,41 +7,71 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 06 Nov 2022 20:36:52 +0100</lastBuildDate>
-    <atom:link href="https://apasto.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://apasto.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
     <item>
-      <title>Decorrelate-Grids</title>
-      <link>https://apasto.github.io/tags/decorrelate-grids/</link>
+      <title>A tool to isolate locally correlated signals between two arrays</title>
+      <link>https://apasto.github.io/a-tool-to-isolate-locally-correlated-signals-between-two-arrays/</link>
       <pubDate>Sun, 06 Nov 2022 20:36:52 +0100</pubDate>
-      <guid>https://apasto.github.io/tags/decorrelate-grids/</guid>
-      <description></description>
+      
+      <guid>https://apasto.github.io/a-tool-to-isolate-locally-correlated-signals-between-two-arrays/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://apasto.github.io/img/logo_linreg.png&#34; alt=&#34;decorrelate-grids logo&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Consider some image-like data (in the form of a &amp;ldquo;grid&amp;rdquo;, a labelled 2-D array) which can be explained at least in part by another observable.
+Suppose that this relationship is linear - or can be approximated as such - and varies spatially, with a spatial scale that is larger than the grid interval.
+Pending some other assumptions, we can invert this relationship in discrete windows: a &lt;em&gt;rolling 2-D linear regression&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The resulting fit, in the form of an array of regression results, can be then subtracted from our original data, ideally isolating our signal of interest with no contribution from the explanatory variable.&lt;/p&gt;
+&lt;p&gt;This was designed with reduction of atmospheric delay in InSAR interferometric couples, which has a topography-dependent component.
+The method, however, can be trivially generalised to other applications - after all its nature is far from complex.
+All due credits for the idea to my colleague &lt;a href=&#34;https://github.com/marbarto&#34;&gt;Marco Bartola&lt;/a&gt; - as of November 2022 a PhD candidate in the &lt;a href=&#34;https://sites.units.it/geodin/&#34;&gt;research unit I am doing a postdoc in&lt;/a&gt; - and to lots of inspiring conversations with him.&lt;/p&gt;
+&lt;p&gt;From the beginning, implementing this sounded quite fun to me, so after quickly setting up a working example for his project work I took it on as a spare-time collateral.
+This seemed a good opportunity to write a Python module and learn how to package it, while working on it at a slower pace - something which is unlikely to happen with my own research work.
+It is fun, and strict-sense fun should have no deadlines, even if I am doing it to incidentally learn something.&lt;/p&gt;
+&lt;p&gt;While I could not find anything ready made already available (if that is not the case, let me know!), the idea on its own is not novel. Some specific application could be novel, indeed, thus let&amp;rsquo;s hope this turns helpful for someone else&amp;rsquo;s purposes.&lt;/p&gt;
+&lt;p&gt;At the current &amp;ldquo;concept stage&amp;rdquo; (let&amp;rsquo;s tag it as &lt;a href=&#34;https://github.com/apasto/decorrelate-grids/releases/tag/v0.1.0-alpha&#34;&gt;v0.0.1-alpha&lt;/a&gt;) it is a working prototype.
+Clone it, create its conda environment, and call it as a shell script.
+A help printout for arguments (using &lt;a href=&#34;https://docs.python.org/3/library/argparse.html&#34;&gt;argparse&lt;/a&gt;) can be accessed with flag -h.
+Being a prototype, the next changes are likely to break current behaviour and syntax.&lt;/p&gt;
+&lt;p&gt;Head over to the repository for any further information: &lt;a href=&#34;https://github.com/apasto/decorrelate-grids&#34;&gt;apasto/decorrelate-grids&lt;/a&gt;.&lt;/p&gt;
+</description>
     </item>
+    
+    
+    
     <item>
-      <title>Insar</title>
-      <link>https://apasto.github.io/tags/insar/</link>
-      <pubDate>Sun, 06 Nov 2022 20:36:52 +0100</pubDate>
-      <guid>https://apasto.github.io/tags/insar/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Remote-Sensing</title>
-      <link>https://apasto.github.io/tags/remote-sensing/</link>
-      <pubDate>Sun, 06 Nov 2022 20:36:52 +0100</pubDate>
-      <guid>https://apasto.github.io/tags/remote-sensing/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Fun-Stuff</title>
-      <link>https://apasto.github.io/tags/fun-stuff/</link>
+      <title>RSS feed to a dot matrix printer</title>
+      <link>https://apasto.github.io/rss-feed-to-a-dot-matrix-printer/</link>
       <pubDate>Tue, 07 Oct 2014 14:00:00 +0200</pubDate>
-      <guid>https://apasto.github.io/tags/fun-stuff/</guid>
-      <description></description>
+      
+      <guid>https://apasto.github.io/rss-feed-to-a-dot-matrix-printer/</guid>
+      <description>&lt;p&gt;This little project has turned out as fun as it&amp;rsquo;s been noisy (rather).
+Not much to showcase, but I cannot find any reason to get rid of it either.&lt;/p&gt;
+&lt;p&gt;A bash script to turn an RSS news feed in escape-formatted dot-matrix printer text.
+Or: a questionable waste of time, continuous-form paper, and ink ribbon.&lt;/p&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/SjZg6AQBymY&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
+&lt;p&gt;Quoting the video caption:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Those escape sequences that look like line noise are Epson ESC/P control codes, to which my printer (a Citizen 120D+) is partially compliant.&lt;/p&gt;
+&lt;p&gt;Someday, somehow, I’ll turn all those sed calls in a nice awk script. Apart from syntax cleanliness, a big issue is reverse ordering the &lt;code&gt;title-desc-pubDate&lt;/code&gt; tuples so the newest headlines are printed last, both in the zero-time print and the updates. Feel free to edit.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This is definitely not the right way to do it and catching all the bad shell scripting practices may be a interesting code review exercise, now.
+Anyway, this mess seems to be still working (see the comments on the YouTube video above).&lt;/p&gt;
+&lt;p&gt;More descriptive comments would have helped, particularly for all the escape codes (all those &lt;code&gt;\\e\\x&lt;/code&gt;-something), which are in the printers own ESC/P dialect (from its original spiral-bound manual, of which I only had the French version - &lt;a href=&#34;https://frinkiac.com/caption/S10E19/283899&#34;&gt;relevant Simpsons quote&lt;/a&gt;).
+Nowadays I do not have this printer at hand (and I vowed to myself I won&amp;rsquo;t be hoarding others) therefore further testing is out of the question :)&lt;/p&gt;
+&lt;p&gt;Keep in mind that the argument provided to &lt;code&gt;lpr -P&lt;/code&gt;, variable &lt;code&gt;cups_raw_queue&lt;/code&gt; (e.g. &lt;code&gt;lpt-raw&lt;/code&gt;) should match the name of a local CUPS printer set as a raw queue on the parallel port (or adapter) device.
+This is a feature which is planned to be deprecated, as of March 2018 - see cups issue &lt;a href=&#34;https://github.com/apple/cups/issues/5271&#34;&gt;#5271&lt;/a&gt;.&lt;/p&gt;
+&lt;script src=&#34;https://gist.github.com/apasto/b6c3d9cfee43cd74309520b886c7b0c3.js?file=LPnewswire.sh&#34;&gt;&lt;/script&gt;
+
+</description>
     </item>
-    <item>
-      <title>Old-Projects</title>
-      <link>https://apasto.github.io/tags/old-projects/</link>
-      <pubDate>Tue, 07 Oct 2014 14:00:00 +0200</pubDate>
-      <guid>https://apasto.github.io/tags/old-projects/</guid>
-      <description></description>
-    </item>
+    
+    
   </channel>
 </rss>

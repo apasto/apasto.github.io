@@ -1,1 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="apasto short notes">
+    
+    <link rel="shortcut icon" href="https://apasto.github.io/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.min.css">
 
+    <link rel="canonical" href="https://apasto.github.io/rss-feed-to-a-dot-matrix-printer/" />
+    <title>RSS feed to a dot matrix printer</title>
+</head>
+<body><header id="banner">
+    <h2><a href="https://apasto.github.io/">Alberto Pastorutti</a></h2>
+    <nav>
+        <ul>
+            <li>
+                <a href="/" title="posts">posts</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main id="content">
+<article>
+    <header id="post-header">
+        <h1>RSS feed to a dot matrix printer</h1>
+        <div>
+                <time>October 7, 2014</time>
+            </div>
+    </header><p>This little project has turned out as fun as it&rsquo;s been noisy (rather).
+Not much to showcase, but I cannot find any reason to get rid of it either.</p>
+<p>A bash script to turn an RSS news feed in escape-formatted dot-matrix printer text.
+Or: a questionable waste of time, continuous-form paper, and ink ribbon.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/SjZg6AQBymY" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h2 id="description">Description</h2>
+<p>Quoting the video caption:</p>
+<blockquote>
+<p>Those escape sequences that look like line noise are Epson ESC/P control codes, to which my printer (a Citizen 120D+) is partially compliant.</p>
+<p>Someday, somehow, I’ll turn all those sed calls in a nice awk script. Apart from syntax cleanliness, a big issue is reverse ordering the <code>title-desc-pubDate</code> tuples so the newest headlines are printed last, both in the zero-time print and the updates. Feel free to edit.</p>
+</blockquote>
+<p>This is definitely not the right way to do it and catching all the bad shell scripting practices may be a interesting code review exercise, now.
+Anyway, this mess seems to be still working (see the comments on the YouTube video above).</p>
+<p>More descriptive comments would have helped, particularly for all the escape codes (all those <code>\\e\\x</code>-something), which are in the printers own ESC/P dialect (from its original spiral-bound manual, of which I only had the French version - <a href="https://frinkiac.com/caption/S10E19/283899">relevant Simpsons quote</a>).
+Nowadays I do not have this printer at hand (and I vowed to myself I won&rsquo;t be hoarding others) therefore further testing is out of the question :)</p>
+<p>Keep in mind that the argument provided to <code>lpr -P</code>, variable <code>cups_raw_queue</code> (e.g. <code>lpt-raw</code>) should match the name of a local CUPS printer set as a raw queue on the parallel port (or adapter) device.
+This is a feature which is planned to be deprecated, as of March 2018 - see cups issue <a href="https://github.com/apple/cups/issues/5271">#5271</a>.</p>
+<script src="https://gist.github.com/apasto/b6c3d9cfee43cd74309520b886c7b0c3.js?file=LPnewswire.sh"></script>
+
+</article>
+<h4>Tags:</h4>
+ 
+<ul>
+   <li>
+    <a href="https://apasto.github.io/tags/fun-stuff/">fun-stuff</a>
+  </li> <li>
+    <a href="https://apasto.github.io/tags/old-projects/">old-projects</a>
+  </li></ul>
+
+
+
+        </main><footer id="footer">
+    Copyright © 2024 Alberto Pastorutti &middot; 
+</footer>
+</body>
+</html>
