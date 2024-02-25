@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="apasto short notes">
+    
+    <link rel="shortcut icon" href="https://apasto.github.io/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.min.css">
+
+    <link rel="canonical" href="https://apasto.github.io/bistatic-passive-radar-with-an-rtlsdr/" />
+    <title>Bistatic passive radar with an RTLSDR</title>
+</head>
+<body><header id="banner">
+    <h2><a href="https://apasto.github.io/">Alberto Pastorutti</a></h2>
+    <nav>
+        <ul>
+            <li>
+                <a href="/" title="posts">posts</a>
+            </li><li>
+                <a href="/about/" title="about">about</a>
+            </li><li>
+                <a href="/minimal_resume/" title="resume">resume</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main id="content">
+<article>
+    <header id="post-header">
+        <h1>Bistatic passive radar with an RTLSDR</h1>
+        <div>
+                <time>January 9, 2015</time>
+            </div>
+    </header>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/vD6mceH40mg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p>In the video above, recorded from <a href="https://www.baudline.com/">baudline</a>, I am receiving the direct and reflected pulses from an L-band radar on <a href="https://geohack.toolforge.org/geohack.php?language=en&amp;params=45.284951_N_14.201965_E_type:mountain">Učka, Croatia</a> - a Lockheed Martin <a href="https://www.radartutorial.eu/19.kartei/02.surv/karte007.en.html">AN/FPS-117</a> at the time of the recording (summer 2014).
+The receiver was 83 km away, with clear LOS to the radar site (<a href="https://maps.app.goo.gl/DYp7V3N5L1m4fdLv9">N45.2868, E014.2027</a>, <a href="https://maps.app.goo.gl/mWEvE5yQaurek5PG8">Street View</a>).</p>
+<p>The center frequency of the pulse-compressed <em>blip</em> is 1258 MHz, which at the time seemed to be one of the four frequency the radar was transmitting on.
+The receiver is a RTL-SDR dongle bought in 2013 (on which you can read more about <a href="https://www.rtl-sdr.com/about-rtl-sdr/">here</a>), with a R820T tuner IC, connected to a 2-dipole collinear array (tuned for 403 MHz) with approx. 7 m of Belden 1694A RG-6 coax.</p>
+<p>The output of the command line tool rtl_sdr was piped to baudline (following the <a href="https://dm5ms.blogspot.com/2012/06/connecting-baudline-to-rtl-sdr.html">useful information by DM5MS</a>). The IQ sampling rate is 2 MHz; the transform is a complex STFT (size is 2048 samples, Blackman window).
+The video shows a 0.008x speed playback of 15 ms of actual recording.
+The reflected pulses become more time-local when using a shorter transform window size, as expected, e.g. 512 samples:</p>
+<p><img src="/img/passiveradar/baudline_smaller_window.png" alt="waterfall-spectrogram-effect-of-smaller-window"></p>
+<p>The waveform seems a rather nice example of <a href="https://www.radartutorial.eu/08.transmitters/Intrapulse%20Modulation.en.html">pulse compression</a> in action:</p>
+<p><img src="/img/passiveradar/baudline_with_waveform.png" alt="waveform-and-waterfall-spectrogram-with-pulse-compression"></p>
+<p>The video was recorded from screen with VLC, the audio piped to stdout and saved, then audio and video were synced in Blender.</p>
+<h2 id="a-detection-attempt">A detection attempt</h2>
+<p>The direct-reflected delay of the event shown in the video is approx 278 µs, which would be compatible with a receiver-to-target distance of 42 km, in a simple 2D along-beam normal incidence model.
+In other words: assuming that the target lies on the extension of the line that connects the radar to the receiver.
+If we allow for the target to be slightly off beam, the geometry of the problem becomes less dull:</p>
+<p><img src="/img/passiveradar/passive_radar_geometry.png" alt="sketch-of-the-geometry-of-2D-bistatic-radar"></p>
+<p>In the sketch above (author: myself, license: CC0), we can see that the locus of reflectors satisfying the delay along the transmitter-plane-receiver T-P-R path (with respect to the T-R <em>direct path</em>) is an ellipse, provided that the three points lie on a plane - since they do not, the solution becomes an ellipsoid.
+The trivial derivation is left as an exercise.</p>
+<p>Let&rsquo;s keep in mind that this off-angle cannot be extremely large: it is limited by the transmitter antenna beamwidth - unless the receiver is so close to the transmitting radar that all the transmitted pulses, even when the dish is pointing elsewhere, are above its noise floor (out of experience: it works).
+Interestingly, also the backscatter of the target from these unusual aspects comes into the model, something that is exploited in other context, unsurprisingly.</p>
+<p>There&rsquo;s another fainter echo closer to the pulse - it may be another target or a time-sidelobe of the main pulse (a side effect of pulse compression?).
+Anyway, I must state that I have no formal knowledge on these topics. So you&rsquo;d better take all this with a grain of salt ;) and go check it on a more reputable source.</p>
+<p>I am quite happy to see this was featured on the <a href="https://www.rtl-sdr.com/analyzing-radar-pulses-baudline-rtl-sdr/">RTL-SDR.com blog on January 12, 2015</a> and mentioned sometime later on <a href="https://www.reddit.com/r/RTLSDR/comments/2zkwaq/comment/cpjwe1m/">r/rtlsdr</a>.</p>
+<p>The image below shows a later attempt, with an L-band bi-quad antenna out in the field.</p>
+<p><img src="/img/passiveradar/kremenjak_biquad_passive_radar.jpg" alt="later-field-setup-kremenjak-biquad-antenna"></p>
+<h2 id="further-work">Further work</h2>
+<p>This has been a nice and fun experiment, however it needs hand picking of events and measuring delays.
+Also, it does not leverage the advantages of pulse compression in any way.
+It would be nice to try some processing on the received pulses (deconvoluting them with received direct pulse?), then to move on with automated detection.
+Alas, I feel that I do not have the knowledge nor the time to embark in such a project.
+Is anyone willing to?</p>
+</article>
+<h4>Tags:</h4>
+ 
+<ul>
+   <li>
+    <a href="https://apasto.github.io/tags/old-projects/">old-projects</a>
+  </li></ul>
+
+
+
+        </main><footer id="footer">
+    Copyright © 2024 Alberto Pastorutti &middot; 
+</footer>
+</body>
+</html>
