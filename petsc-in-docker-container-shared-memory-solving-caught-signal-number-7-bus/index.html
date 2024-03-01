@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="apasto short notes">
+    
+    <link rel="shortcut icon" href="https://apasto.github.io/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.min.css">
+
+    <link rel="canonical" href="https://apasto.github.io/petsc-in-docker-container-shared-memory-solving-caught-signal-number-7-bus/" />
+    <title>PETSC in Docker: container shared memory (solving &#34;caught signal number 7 BUS&#34;)</title>
+</head>
+<body><header id="banner">
+    <h2><a href="https://apasto.github.io/">Alberto Pastorutti</a></h2>
+    <nav>
+        <ul>
+            <li>
+                <a href="/" title="posts">posts</a>
+            </li><li>
+                <a href="/about/" title="about">about</a>
+            </li><li>
+                <a href="/minimal_resume/" title="resume">resume</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main id="content">
+<article>
+    <header id="post-header">
+        <h1>PETSC in Docker: container shared memory (solving &#34;caught signal number 7 BUS&#34;)</h1>
+        <div>
+                <time>November 16, 2022</time>
+            </div>
+    </header><p>Since the last May I have been using <a href="https://underworld2.readthedocs.io/en/latest/">Underworld2</a> to run some thermo-mechanical models of rifted margins through time, using its nice Python API.
+More on that in a following post.</p>
+<p>The suggested deployment for &ldquo;usage on personal computers&rdquo; of Underworld is via Docker.
+The infrastructure that I am using is on a slightly larger scale, a 36-cpu virtual machine - which we may still consider a PC for these purposes.</p>
+<p>Using Docker had me skeptical at the beginning, for no valid reason apart my own ignorance.
+It has proven fit for this task, pending migration to HPC infrastructure (which will involve me learning a bit about building a singularity image).</p>
+<p>In the setup I have adopted, &ldquo;running a model&rdquo; boils down to setting up a prototype model run in a Jupyter Notebook, converting that to a plain Python script using <code>jupytext</code>, then calling the script with mpirun, on a given number of processes, e.g. <code>mpirun -np 8</code>.
+I will not digress on this, which merits its own post, but carrying out all the setup phase in notebooks provides an hassle-free way to define and test complex starting conditions.
+Also, jupytext-converted notebooks are then copied in the model output directory and rendered (using <code>papermill</code>) ensuring complete reproducibility and documentation of the model starting conditions.</p>
+<p>While looking for an optimum number of processes in this setup, I have incurred in the following error, when <code>-np</code> was set larger than circa 10 (the actual number depending on the model mesh size):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">[3]PETSC ERROR: Caught signal number 7 BUS: Bus Error, possibly illegal memory access
+</span></span></code></pre></div><p>Here is a larger portion of the error printout, with the repeated prefix omitted:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">---------------------------------------------------------
+</span></span><span class="line"><span class="cl">Caught signal number 7 BUS: Bus Error, possibly illegal memory access
+</span></span><span class="line"><span class="cl">Try option -start_in_debugger or -on_error_attach_debugger
+</span></span><span class="line"><span class="cl">or see https://petsc.org/release/faq/#valgrind
+</span></span><span class="line"><span class="cl">or try http://valgrind.org on GNU/linux and Apple MacOS to find memory corruption errors
+</span></span><span class="line"><span class="cl">configure using --with-debugging=yes, recompile, link, and run 
+</span></span><span class="line"><span class="cl">to get more information on the crash.
+</span></span><span class="line"><span class="cl">--------------------- Error Message ---------------------
+</span></span><span class="line"><span class="cl">Signal received
+</span></span><span class="line"><span class="cl">See https://petsc.org/release/faq/ for trouble shooting.
+</span></span><span class="line"><span class="cl">Petsc Release Version 3.17.1, Apr 28, 2022 
+</span></span><span class="line"><span class="cl">03_ext.py on a  named 7e468e5db1bb by Unknown Wed Nov 16 13:16:10 2022
+</span></span><span class="line"><span class="cl">Configure options --with-debugging=0 --prefix=/usr/local --COPTFLAGS=&#34;-g -O3&#34; --CXXOPTFLAGS=&#34;-g -O3&#34; --FOPTFLAGS=&#34;-g -O3&#34; --with-petsc4py=1 --with-zlib=1 --download-hdf5=1 --download-mumps=1 --download-parmetis=1 --download-metis=1 --download-superlu=1 --download-hypre=1 --download-scalapack=1 --download-superlu_dist=1 --download-ctetgen --download-eigen --download-triangle --useThreads=0 --download-superlu=1 --with-shared-libraries --with-cxx-dialect=C++11 --with-make-np=8
+</span></span><span class="line"><span class="cl">#1 User provided function() at unknown file:0
+</span></span><span class="line"><span class="cl">Run with -malloc_debug to check if memory corruption is causing the crash.
+</span></span><span class="line"><span class="cl">application called MPI_Abort(MPI_COMM_WORLD, 59) - process 3
+</span></span></code></pre></div><p>The underlying cause was indeed trivial, however it took a while to troubleshoot:</p>
+<p><img src="/img/underworld_docker_shm.gif" alt="gif: status of shared memory during test run"></p>
+<p>What I was running into is that the container was beig allocated 64 MB of shared memory, by default (<a href="https://docs.docker.com/engine/reference/run/#runtime-constraints-on-resources">Docker run reference</a>), which ran out when the number of processes increased.
+This resource provided to be quite helpful: <a href="https://datawookie.dev/blog/2021/11/shared-memory-docker/">datawookie.dev: Shared Memory &amp; Docker</a> [<a href="https://web.archive.org/web/20230103130929/https://datawookie.dev/blog/2021/11/shared-memory-docker/">archive.org archived link</a>].</p>
+<p>Increasing the amount of shared memory allocated to the container (<code>--shm-size</code> option in <code>docker run</code>) solved the issue.</p>
+</article>
+<h4>Tags:</h4>
+ 
+<ul>
+   <li>
+    <a href="https://apasto.github.io/tags/models/">models</a>
+  </li> <li>
+    <a href="https://apasto.github.io/tags/docker/">docker</a>
+  </li></ul>
+
+
+
+        </main><footer id="footer">
+    Copyright © 2024 Alberto Pastorutti &middot; 
+</footer>
+</body>
+</html>

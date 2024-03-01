@@ -59,6 +59,50 @@ I am leaving this for a further chapter.&lt;/p&gt;
     
     
     <item>
+      <title>PETSC in Docker: container shared memory (solving &#34;caught signal number 7 BUS&#34;)</title>
+      <link>https://apasto.github.io/petsc-in-docker-container-shared-memory-solving-caught-signal-number-7-bus/</link>
+      <pubDate>Wed, 16 Nov 2022 22:45:00 +0100</pubDate>
+      
+      <guid>https://apasto.github.io/petsc-in-docker-container-shared-memory-solving-caught-signal-number-7-bus/</guid>
+      <description>&lt;p&gt;Since the last May I have been using &lt;a href=&#34;https://underworld2.readthedocs.io/en/latest/&#34;&gt;Underworld2&lt;/a&gt; to run some thermo-mechanical models of rifted margins through time, using its nice Python API.
+More on that in a following post.&lt;/p&gt;
+&lt;p&gt;The suggested deployment for &amp;ldquo;usage on personal computers&amp;rdquo; of Underworld is via Docker.
+The infrastructure that I am using is on a slightly larger scale, a 36-cpu virtual machine - which we may still consider a PC for these purposes.&lt;/p&gt;
+&lt;p&gt;Using Docker had me skeptical at the beginning, for no valid reason apart my own ignorance.
+It has proven fit for this task, pending migration to HPC infrastructure (which will involve me learning a bit about building a singularity image).&lt;/p&gt;
+&lt;p&gt;In the setup I have adopted, &amp;ldquo;running a model&amp;rdquo; boils down to setting up a prototype model run in a Jupyter Notebook, converting that to a plain Python script using &lt;code&gt;jupytext&lt;/code&gt;, then calling the script with mpirun, on a given number of processes, e.g. &lt;code&gt;mpirun -np 8&lt;/code&gt;.
+I will not digress on this, which merits its own post, but carrying out all the setup phase in notebooks provides an hassle-free way to define and test complex starting conditions.
+Also, jupytext-converted notebooks are then copied in the model output directory and rendered (using &lt;code&gt;papermill&lt;/code&gt;) ensuring complete reproducibility and documentation of the model starting conditions.&lt;/p&gt;
+&lt;p&gt;While looking for an optimum number of processes in this setup, I have incurred in the following error, when &lt;code&gt;-np&lt;/code&gt; was set larger than circa 10 (the actual number depending on the model mesh size):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[3]PETSC ERROR: Caught signal number 7 BUS: Bus Error, possibly illegal memory access
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Here is a larger portion of the error printout, with the repeated prefix omitted:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;---------------------------------------------------------
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Caught signal number 7 BUS: Bus Error, possibly illegal memory access
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Try option -start_in_debugger or -on_error_attach_debugger
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;or see https://petsc.org/release/faq/#valgrind
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;or try http://valgrind.org on GNU/linux and Apple MacOS to find memory corruption errors
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;configure using --with-debugging=yes, recompile, link, and run 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;to get more information on the crash.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;--------------------- Error Message ---------------------
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Signal received
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;See https://petsc.org/release/faq/ for trouble shooting.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Petsc Release Version 3.17.1, Apr 28, 2022 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;03_ext.py on a  named 7e468e5db1bb by Unknown Wed Nov 16 13:16:10 2022
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Configure options --with-debugging=0 --prefix=/usr/local --COPTFLAGS=&amp;#34;-g -O3&amp;#34; --CXXOPTFLAGS=&amp;#34;-g -O3&amp;#34; --FOPTFLAGS=&amp;#34;-g -O3&amp;#34; --with-petsc4py=1 --with-zlib=1 --download-hdf5=1 --download-mumps=1 --download-parmetis=1 --download-metis=1 --download-superlu=1 --download-hypre=1 --download-scalapack=1 --download-superlu_dist=1 --download-ctetgen --download-eigen --download-triangle --useThreads=0 --download-superlu=1 --with-shared-libraries --with-cxx-dialect=C++11 --with-make-np=8
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#1 User provided function() at unknown file:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Run with -malloc_debug to check if memory corruption is causing the crash.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;application called MPI_Abort(MPI_COMM_WORLD, 59) - process 3
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The underlying cause was indeed trivial, however it took a while to troubleshoot:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://apasto.github.io/img/underworld_docker_shm.gif&#34; alt=&#34;gif: status of shared memory during test run&#34;&gt;&lt;/p&gt;
+&lt;p&gt;What I was running into is that the container was beig allocated 64 MB of shared memory, by default (&lt;a href=&#34;https://docs.docker.com/engine/reference/run/#runtime-constraints-on-resources&#34;&gt;Docker run reference&lt;/a&gt;), which ran out when the number of processes increased.
+This resource provided to be quite helpful: &lt;a href=&#34;https://datawookie.dev/blog/2021/11/shared-memory-docker/&#34;&gt;datawookie.dev: Shared Memory &amp;amp; Docker&lt;/a&gt; [&lt;a href=&#34;https://web.archive.org/web/20230103130929/https://datawookie.dev/blog/2021/11/shared-memory-docker/&#34;&gt;archive.org archived link&lt;/a&gt;].&lt;/p&gt;
+&lt;p&gt;Increasing the amount of shared memory allocated to the container (&lt;code&gt;--shm-size&lt;/code&gt; option in &lt;code&gt;docker run&lt;/code&gt;) solved the issue.&lt;/p&gt;
+</description>
+    </item>
+    
+    
+    
+    <item>
       <title>A tool to isolate locally correlated signals between two arrays</title>
       <link>https://apasto.github.io/a-tool-to-isolate-locally-correlated-signals-between-two-arrays/</link>
       <pubDate>Sun, 06 Nov 2022 20:36:52 +0100</pubDate>
