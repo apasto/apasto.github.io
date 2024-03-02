@@ -62,7 +62,7 @@ Also, jupytext-converted notebooks are then copied in the model output directory
 </span></span><span class="line"><span class="cl">application called MPI_Abort(MPI_COMM_WORLD, 59) - process 3
 </span></span></code></pre></div><p>The underlying cause was indeed trivial, however it took a while to troubleshoot:</p>
 <p><img src="/img/underworld_docker_shm.gif" alt="gif: status of shared memory during test run"></p>
-<p>What I was running into is that the container was beig allocated 64 MB of shared memory, by default (<a href="https://docs.docker.com/engine/reference/run/#runtime-constraints-on-resources">Docker run reference</a>), which ran out when the number of processes increased.
+<p>What I was running into is that the container was being allocated 64 MB of shared memory, by default (<a href="https://docs.docker.com/engine/reference/run/#runtime-constraints-on-resources">Docker run reference</a>), which ran out when the number of processes increased.
 This resource provided to be quite helpful: <a href="https://datawookie.dev/blog/2021/11/shared-memory-docker/">datawookie.dev: Shared Memory &amp; Docker</a> [<a href="https://web.archive.org/web/20230103130929/https://datawookie.dev/blog/2021/11/shared-memory-docker/">archive.org archived link</a>].</p>
 <p>Increasing the amount of shared memory allocated to the container (<code>--shm-size</code> option in <code>docker run</code>) solved the issue.</p>
 </article>

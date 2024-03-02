@@ -94,7 +94,7 @@ Also, jupytext-converted notebooks are then copied in the model output directory
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;application called MPI_Abort(MPI_COMM_WORLD, 59) - process 3
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The underlying cause was indeed trivial, however it took a while to troubleshoot:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://apasto.github.io/img/underworld_docker_shm.gif&#34; alt=&#34;gif: status of shared memory during test run&#34;&gt;&lt;/p&gt;
-&lt;p&gt;What I was running into is that the container was beig allocated 64 MB of shared memory, by default (&lt;a href=&#34;https://docs.docker.com/engine/reference/run/#runtime-constraints-on-resources&#34;&gt;Docker run reference&lt;/a&gt;), which ran out when the number of processes increased.
+&lt;p&gt;What I was running into is that the container was being allocated 64 MB of shared memory, by default (&lt;a href=&#34;https://docs.docker.com/engine/reference/run/#runtime-constraints-on-resources&#34;&gt;Docker run reference&lt;/a&gt;), which ran out when the number of processes increased.
 This resource provided to be quite helpful: &lt;a href=&#34;https://datawookie.dev/blog/2021/11/shared-memory-docker/&#34;&gt;datawookie.dev: Shared Memory &amp;amp; Docker&lt;/a&gt; [&lt;a href=&#34;https://web.archive.org/web/20230103130929/https://datawookie.dev/blog/2021/11/shared-memory-docker/&#34;&gt;archive.org archived link&lt;/a&gt;].&lt;/p&gt;
 &lt;p&gt;Increasing the amount of shared memory allocated to the container (&lt;code&gt;--shm-size&lt;/code&gt; option in &lt;code&gt;docker run&lt;/code&gt;) solved the issue.&lt;/p&gt;
 </description>
@@ -125,6 +125,35 @@ Clone it, create its conda environment, and call it as a shell script.
 A help printout for arguments (using &lt;a href=&#34;https://docs.python.org/3/library/argparse.html&#34;&gt;argparse&lt;/a&gt;) can be accessed with flag -h.
 Being a prototype, the next changes are likely to break current behaviour and syntax.&lt;/p&gt;
 &lt;p&gt;Head over to the repository for any further information: &lt;a href=&#34;https://github.com/apasto/decorrelate-grids&#34;&gt;apasto/decorrelate-grids&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    
+    
+    <item>
+      <title>Lens Correction Profile for Tamron 135mm f/2.5 03B</title>
+      <link>https://apasto.github.io/lens-correction-profile-for-tamron-135mm-f/2.5-03b/</link>
+      <pubDate>Tue, 22 Feb 2022 10:01:46 +0100</pubDate>
+      
+      <guid>https://apasto.github.io/lens-correction-profile-for-tamron-135mm-f/2.5-03b/</guid>
+      <description>&lt;p&gt;I have been looking for a vintage prime telephoto lens for a while, until I found this nice 135mm f/2.5 - not top notch, but close enough to more expensive similar vintage primes.
+Find more about it here: &lt;a href=&#34;https://www.pentaxforums.com/userreviews/tamron-adaptall-2-135mm-f-2-5-03b.html&#34;&gt;pentaxforums.com&lt;/a&gt; (&lt;a href=&#34;https://web.archive.org/web/20220222084506/https://www.pentaxforums.com/userreviews/tamron-adaptall-2-135mm-f-2-5-03b.html&#34;&gt;archive.org link&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;As expected with such a lens, chromatic aberration (CA) is an issue, especially wide open.
+Blue/red transverse CA is the most striking&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://apasto.github.io/img/lensprofile/135_ca_defringe_example_checkerboard.jpg&#34; alt=&#34;Before and after lens correction on checkerboard, upper right corner at f2.5&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Above: checkerboard calibration chart.
+Before (left) and after (right) applying the lens profile corrections in ACR.
+Upper right corner of frame.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://apasto.github.io/img/lensprofile/135_ca_defringe_example_real.jpg&#34; alt=&#34;Before and after lens correction on a real world example against a bright background&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Above: real-world test: subject (a whip antenna) against a bright background, slightly off focus.
+Before (left) and after (right) applying the lens profile corrections in ACR.
+Upper right corner of frame.&lt;/p&gt;
+&lt;p&gt;Correction may be applied in postprocessing, but it is tedious and for sure having a previously calibrated &lt;em&gt;lens profile&lt;/em&gt; take care of most of it is appreciated.
+I was curious in trying the &lt;a href=&#34;https://helpx.adobe.com/camera-raw/digital-negative.html#Adobe_Lens_Profile_Creator&#34;&gt;Adobe Lens Profile Creator&lt;/a&gt; (&lt;a href=&#34;https://web.archive.org/web/20220127035413/https://helpx.adobe.com/camera-raw/digital-negative.html&#34;&gt;archive.org link&lt;/a&gt;), so I printed one of the provided checkerboard charts and started shooting.&lt;/p&gt;
+&lt;p&gt;Find the lcp lens profile here: &lt;a href=&#34;https://github.com/apasto/lensprofile_tamron_03B&#34;&gt;apasto/lensprofile_tamron_03B&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In the README of the same repository I am also providing some notes on &lt;a href=&#34;https://github.com/apasto/lensprofile_tamron_03B?tab=readme-ov-file#collateral-setting-aperture-metadata-in-exif&#34;&gt;setting the lens and aperture metadata in EXIF&lt;/a&gt; when using a manual lens, using &lt;a href=&#34;https://exiv2.org/index.html&#34;&gt;&lt;code&gt;exiv2&lt;/code&gt;&lt;/a&gt;.
+That part includes the results of some research and substantial trial and error on the Exif parameters.
+An example batch call to &lt;code&gt;exiv2&lt;/code&gt; to set the metadata of the lens in questions (replacing the unknown lens reported by the camera) can also be found.&lt;/p&gt;
 </description>
     </item>
     
