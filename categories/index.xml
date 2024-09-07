@@ -166,9 +166,12 @@ An example batch call to &lt;code&gt;exiv2&lt;/code&gt; to set the metadata of t
       
       <guid>https://apasto.github.io/bistatic-passive-radar-with-an-rtlsdr/</guid>
       <description>
-&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;https://www.youtube.com/embed/vD6mceH40mg&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
+
+    
+    &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; allowfullscreen=&#34;allowfullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/vD6mceH40mg?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;
+      &gt;&lt;/iframe&gt;
+    &lt;/div&gt;
 
 &lt;p&gt;In the video above, recorded from &lt;a href=&#34;https://www.baudline.com/&#34;&gt;baudline&lt;/a&gt;, I am receiving the direct and reflected pulses from an L-band radar on &lt;a href=&#34;https://geohack.toolforge.org/geohack.php?language=en&amp;amp;params=45.284951_N_14.201965_E_type:mountain&#34;&gt;Učka, Croatia&lt;/a&gt; - a Lockheed Martin &lt;a href=&#34;https://www.radartutorial.eu/19.kartei/02.surv/karte007.en.html&#34;&gt;AN/FPS-117&lt;/a&gt; at the time of the recording (summer 2014).
 The receiver was 83 km away, with clear LOS to the radar site (&lt;a href=&#34;https://maps.app.goo.gl/DYp7V3N5L1m4fdLv9&#34;&gt;N45.2868, E014.2027&lt;/a&gt;, &lt;a href=&#34;https://maps.app.goo.gl/mWEvE5yQaurek5PG8&#34;&gt;Street View&lt;/a&gt;).&lt;/p&gt;
@@ -217,9 +220,12 @@ Not much to showcase, but I cannot find any reason to get rid of it either.&lt;/
 &lt;p&gt;A bash script to turn an RSS news feed in escape-formatted dot-matrix printer text.
 Or: a questionable waste of time, continuous-form paper, and ink ribbon.&lt;/p&gt;
 
-&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;https://www.youtube.com/embed/SjZg6AQBymY&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
+
+    
+    &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; allowfullscreen=&#34;allowfullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/SjZg6AQBymY?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;
+      &gt;&lt;/iframe&gt;
+    &lt;/div&gt;
 
 &lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
 &lt;p&gt;Quoting the video caption:&lt;/p&gt;
