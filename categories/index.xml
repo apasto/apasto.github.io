@@ -16,6 +16,24 @@
     
     
     <item>
+      <title>Good read: the origins of GMT</title>
+      <link>https://apasto.github.io/good-read-the-origins-of-gmt/</link>
+      <pubDate>Sun, 21 Apr 2024 21:54:40 +0100</pubDate>
+      
+      <guid>https://apasto.github.io/good-read-the-origins-of-gmt/</guid>
+      <description>&lt;p&gt;I have just stumbled upon this paper from the late Pål Wessel and found it to be quite the good read:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Wessel, P. (2024). The origins of the generic mapping tools: From table tennis to geoscience. Perspectives of Earth and Space Scientists, 5, e2023CN000231. &lt;a href=&#34;https://doi.org/10.1029/2023CN000231&#34;&gt;doi:10.1029/2023CN000231&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;GMT has been an invaluable tool for a good part of my journey as a geoscientist, one to feel deeply grateful for.&lt;/p&gt;
+&lt;p&gt;From being a stubborn grad student who even attempted avoiding it, to becoming a staunch advocate for it, going so far as to evangelize newcomers in the group I&amp;rsquo;ve been working in - it&amp;rsquo;s been there, at short reach on the tool belt.
+At the end of this month, I am bound to leave academic research, and with it all the reasons to use GMT&amp;hellip; likely, then who knows when it may turn out useful :)&lt;/p&gt;
+</description>
+    </item>
+    
+    
+    
+    <item>
       <title>A dull mistery: ethernet shorted over</title>
       <link>https://apasto.github.io/a-dull-mistery-ethernet-shorted-over/</link>
       <pubDate>Fri, 25 Aug 2023 20:00:00 +0100</pubDate>
@@ -166,11 +184,8 @@ An example batch call to &lt;code&gt;exiv2&lt;/code&gt; to set the metadata of t
       
       <guid>https://apasto.github.io/bistatic-passive-radar-with-an-rtlsdr/</guid>
       <description>
-
-    
     &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; allowfullscreen=&#34;allowfullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/vD6mceH40mg?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;
-      &gt;&lt;/iframe&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; allowfullscreen=&#34;allowfullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/vD6mceH40mg?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
     &lt;/div&gt;
 
 &lt;p&gt;In the video above, recorded from &lt;a href=&#34;https://www.baudline.com/&#34;&gt;baudline&lt;/a&gt;, I am receiving the direct and reflected pulses from an L-band radar on &lt;a href=&#34;https://geohack.toolforge.org/geohack.php?language=en&amp;amp;params=45.284951_N_14.201965_E_type:mountain&#34;&gt;Učka, Croatia&lt;/a&gt; - a Lockheed Martin &lt;a href=&#34;https://www.radartutorial.eu/19.kartei/02.surv/karte007.en.html&#34;&gt;AN/FPS-117&lt;/a&gt; at the time of the recording (summer 2014).
@@ -220,11 +235,8 @@ Not much to showcase, but I cannot find any reason to get rid of it either.&lt;/
 &lt;p&gt;A bash script to turn an RSS news feed in escape-formatted dot-matrix printer text.
 Or: a questionable waste of time, continuous-form paper, and ink ribbon.&lt;/p&gt;
 
-
-    
     &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; allowfullscreen=&#34;allowfullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/SjZg6AQBymY?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;
-      &gt;&lt;/iframe&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; allowfullscreen=&#34;allowfullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/SjZg6AQBymY?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
     &lt;/div&gt;
 
 &lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
