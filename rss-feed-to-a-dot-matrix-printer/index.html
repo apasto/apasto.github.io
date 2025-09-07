@@ -36,17 +36,15 @@
 Not much to showcase, but I cannot find any reason to get rid of it either.</p>
 <p>A bash script to turn an RSS news feed in escape-formatted dot-matrix printer text.
 Or: a questionable waste of time, continuous-form paper, and ink ribbon.</p>
-
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/SjZg6AQBymY?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/SjZg6AQBymY?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
     </div>
 
 <h2 id="description">Description</h2>
 <p>Quoting the video caption:</p>
 <blockquote>
 <p>Those escape sequences that look like line noise are Epson ESC/P control codes, to which my printer (a Citizen 120D+) is partially compliant.</p>
-<p>Someday, somehow, I’ll turn all those sed calls in a nice awk script. Apart from syntax cleanliness, a big issue is reverse ordering the <code>title-desc-pubDate</code> tuples so the newest headlines are printed last, both in the zero-time print and the updates. Feel free to edit.</p>
-</blockquote>
+<p>Someday, somehow, I’ll turn all those sed calls in a nice awk script. Apart from syntax cleanliness, a big issue is reverse ordering the <code>title-desc-pubDate</code> tuples so the newest headlines are printed last, both in the zero-time print and the updates. Feel free to edit.</p></blockquote>
 <p>This is definitely not the right way to do it and catching all the bad shell scripting practices may be a interesting code review exercise, now.
 Anyway, this mess seems to be still working (see the comments on the YouTube video above).</p>
 <p>More descriptive comments would have helped, particularly for all the escape codes (all those <code>\\e\\x</code>-something), which are in the printers own ESC/P dialect (from its original spiral-bound manual, of which I only had the French version - <a href="https://frinkiac.com/caption/S10E19/283899">relevant Simpsons quote</a>).

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="apasto short notes">
+    
+    <link rel="shortcut icon" href="https://apasto.github.io/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.min.css">
+
+    <link rel="canonical" href="https://apasto.github.io/flat-vs-standing-mounting-and-cpu-temperature-fujitsu-futro-s920/" />
+    <title>Flat vs standing mounting and CPU temperature, Fujitsu Futro S920</title>
+</head>
+<body><header id="banner">
+    <h2><a href="https://apasto.github.io/">Alberto Pastorutti</a></h2>
+    <nav>
+        <ul>
+            <li>
+                <a href="/" title="posts">posts</a>
+            </li><li>
+                <a href="/about/" title="about">about</a>
+            </li><li>
+                <a href="/minimal_resume/" title="resume">resume</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main id="content">
+<article>
+    <header id="post-header">
+        <h1>Flat vs standing mounting and CPU temperature, Fujitsu Futro S920</h1>
+        <div>
+                <time>September 7, 2025</time>
+            </div>
+    </header><p>Foreword: this might not be overly interesting, but I was surprised by the striking difference.</p>
+<p>This is what I have seen after mounting this small box upright on the wall, after crafting two wall brackets: it is running 7-8 °C cooler.
+The workload remained similar throughout both weeks. While ambient temperature certainly affects core temperatures, its impact seemed less significant compared to the direct effect of the new mounting position.</p>
+<p>Screenshot from a Grafana dashboard, data sampled via Prometheus Node Exporter:</p>
+<p><img src="/img/s920_flat_upright_coretemp.png" alt="S920 Core Temperature flat vs upright 2 weeks"></p>
+<p>While I&rsquo;m on the topic of this former thin client, I should mention its power consumption: 0.27 kWh per day.
+It&rsquo;s being used as a Proxmox PVE cluster with a relatively light average CPU utilization of 15%, and it includes a Mini PCIe SATA controller and four SSDs.
+For the sake of completeness, it mounts an AMD GX-415GA.</p>
+</article>
+<h4>Tags:</h4>
+ 
+<ul>
+   <li>
+    <a href="https://apasto.github.io/tags/hardware/">hardware</a>
+  </li></ul>
+
+
+
+        </main><footer id="footer">
+    Copyright © 2025 Alberto Pastorutti &middot; 
+</footer>
+</body>
+</html>
