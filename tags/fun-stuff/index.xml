@@ -2,27 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fun-Stuff on Alberto Pastorutti</title>
-    <link>https://apasto.github.io/tags/fun-stuff/</link>
+    <link>https://blog.past.ovh/tags/fun-stuff/</link>
     <description>Recent content in Fun-Stuff on Alberto Pastorutti</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 07 Oct 2014 14:00:00 +0200</lastBuildDate>
     
-	<atom:link href="https://apasto.github.io/tags/fun-stuff/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.past.ovh/tags/fun-stuff/index.xml" rel="self" type="application/rss+xml" />
     
     
     
     <item>
       <title>Flat vs standing mounting and CPU temperature, Fujitsu Futro S920</title>
-      <link>https://apasto.github.io/flat-vs-standing-mounting-and-cpu-temperature-fujitsu-futro-s920/</link>
+      <link>https://blog.past.ovh/flat-vs-standing-mounting-and-cpu-temperature-fujitsu-futro-s920/</link>
       <pubDate>Sun, 07 Sep 2025 09:55:54 +0200</pubDate>
       
-      <guid>https://apasto.github.io/flat-vs-standing-mounting-and-cpu-temperature-fujitsu-futro-s920/</guid>
+      <guid>https://blog.past.ovh/flat-vs-standing-mounting-and-cpu-temperature-fujitsu-futro-s920/</guid>
       <description>&lt;p&gt;Foreword: this might not be overly interesting, but I was surprised by the striking difference.&lt;/p&gt;
 &lt;p&gt;This is what I have seen after mounting this small box upright on the wall, after crafting two wall brackets: it is running 7-8 °C cooler.
 The workload remained similar throughout both weeks. While ambient temperature certainly affects core temperatures, its impact seemed less significant compared to the direct effect of the new mounting position.&lt;/p&gt;
 &lt;p&gt;Screenshot from a Grafana dashboard, data sampled via Prometheus Node Exporter:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://apasto.github.io/img/s920_flat_upright_coretemp.png&#34; alt=&#34;S920 Core Temperature flat vs upright 2 weeks&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.past.ovh/img/s920_flat_upright_coretemp.png&#34; alt=&#34;S920 Core Temperature flat vs upright 2 weeks&#34;&gt;&lt;/p&gt;
 &lt;p&gt;While I&amp;rsquo;m on the topic of this former thin client, I should mention its power consumption: 0.27 kWh per day.
 It&amp;rsquo;s being used as a Proxmox PVE cluster with a relatively light average CPU utilization of 15%, and it includes a Mini PCIe SATA controller and four SSDs.
 For the sake of completeness, it mounts an AMD GX-415GA.&lt;/p&gt;
@@ -37,13 +37,14 @@ For the sake of completeness, it mounts an AMD GX-415GA.&lt;/p&gt;
     
     <item>
       <title>Good read: the origins of GMT</title>
-      <link>https://apasto.github.io/good-read-the-origins-of-gmt/</link>
+      <link>https://blog.past.ovh/good-read-the-origins-of-gmt/</link>
       <pubDate>Sun, 21 Apr 2024 21:54:40 +0100</pubDate>
       
-      <guid>https://apasto.github.io/good-read-the-origins-of-gmt/</guid>
+      <guid>https://blog.past.ovh/good-read-the-origins-of-gmt/</guid>
       <description>&lt;p&gt;I have just stumbled upon this paper from the late Pål Wessel and found it to be quite the good read:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Wessel, P. (2024). The origins of the generic mapping tools: From table tennis to geoscience. Perspectives of Earth and Space Scientists, 5, e2023CN000231. &lt;a href=&#34;https://doi.org/10.1029/2023CN000231&#34;&gt;doi:10.1029/2023CN000231&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Wessel, P. (2024). The origins of the generic mapping tools: From table tennis to geoscience. Perspectives of Earth and Space Scientists, 5, e2023CN000231. &lt;a href=&#34;https://doi.org/10.1029/2023CN000231&#34;&gt;doi:10.1029/2023CN000231&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;GMT has been an invaluable tool for a good part of my journey as a geoscientist, one to feel deeply grateful for.&lt;/p&gt;
 &lt;p&gt;From being a stubborn grad student who even attempted avoiding it, to becoming a staunch advocate for it, going so far as to evangelize newcomers in the group I&amp;rsquo;ve been working in - it&amp;rsquo;s been there, at short reach on the tool belt.
 At the end of this month, I am bound to leave academic research, and with it all the reasons to use GMT&amp;hellip; likely, then who knows when it may turn out useful :)&lt;/p&gt;
@@ -54,10 +55,10 @@ At the end of this month, I am bound to leave academic research, and with it all
     
     <item>
       <title>A dull mistery: ethernet shorted over</title>
-      <link>https://apasto.github.io/a-dull-mistery-ethernet-shorted-over/</link>
+      <link>https://blog.past.ovh/a-dull-mistery-ethernet-shorted-over/</link>
       <pubDate>Fri, 25 Aug 2023 20:00:00 +0100</pubDate>
       
-      <guid>https://apasto.github.io/a-dull-mistery-ethernet-shorted-over/</guid>
+      <guid>https://blog.past.ovh/a-dull-mistery-ethernet-shorted-over/</guid>
       <description>&lt;p&gt;Summary: a PoE powered IP camera stopped working and I have tried to figure out why. Spoiler: I get to no conclusions here, but ruling out the various options has been somewhat fun.&lt;/p&gt;
 &lt;p&gt;An IP camera that I had placed on the roof suddenly stopped working after more than four years of flawless operation.
 The day of the mishap was rather unremarkable: no heavy rain, not particularly warm not cold, no thunderstorms - surely not the worst day it had endured up there. For the sake of gratuitous pedantry, a Mean Time Between Failures (MTBF, sample size = 1) of 1544 days: 2018-09-20 to 2022-12-12.&lt;/p&gt;
@@ -65,9 +66,9 @@ The day of the mishap was rather unremarkable: no heavy rain, not particularly w
 In light of this, the solution entailed buying a new one and climbing on the roof to swap them - a rather cumbersome and a risky business even with all due precautions, which I would have been happy to avoid.&lt;/p&gt;
 &lt;p&gt;The somewhat disappointing surprise after this adventure was finding out that the even the new camera was not powering on. Suspecting some mistake with crimping the 8P8C jack on the roof under a blazing August sun, arguably not the most ideal place and time for such a task, I crimped a new one - to no avail. After a disappointing trip back down, the old camera was now working fine, on the bench.
 Thinning down the remaining options in this fun exercise in troubleshooting, I identified a likely culprit in the downstairs-end of the cable coming down from the roof: the Ethernet wall socket. Here it was, with a surprising &lt;em&gt;stain&lt;/em&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://apasto.github.io/img/poefailure/socket_with_sticker.jpg&#34; alt=&#34;8P8C RJ45 Ethernet wall socket with arcing marks&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.past.ovh/img/poefailure/socket_with_sticker.jpg&#34; alt=&#34;8P8C RJ45 Ethernet wall socket with arcing marks&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Let&amp;rsquo;s get the wiring scheme sticker out of the way:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://apasto.github.io/img/poefailure/socket_no_sticker.jpg&#34; alt=&#34;8P8C RJ45 Ethernet wall socket with arcing marks, sticker removed&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.past.ovh/img/poefailure/socket_no_sticker.jpg&#34; alt=&#34;8P8C RJ45 Ethernet wall socket with arcing marks, sticker removed&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Striking signs of&amp;hellip; arcing? can be seen between the wires in pair 3 (TIA/EIA 568B in use), the green and green-white wires, pins 6 and 3 in the 8P8C connector.
 That discoloration affected the label and the nearby shield - however UTP cable was used, so it was likely not part of the current path.&lt;/p&gt;
 &lt;p&gt;The socket is a Vimar Idea 16359 with an insert for CAT5e FTP, punchdown terminals.
@@ -97,10 +98,10 @@ I am leaving this for a further chapter.&lt;/p&gt;
     
     <item>
       <title>PETSC in Docker: container shared memory (solving &#34;caught signal number 7 BUS&#34;)</title>
-      <link>https://apasto.github.io/petsc-in-docker-container-shared-memory-solving-caught-signal-number-7-bus/</link>
+      <link>https://blog.past.ovh/petsc-in-docker-container-shared-memory-solving-caught-signal-number-7-bus/</link>
       <pubDate>Wed, 16 Nov 2022 22:45:00 +0100</pubDate>
       
-      <guid>https://apasto.github.io/petsc-in-docker-container-shared-memory-solving-caught-signal-number-7-bus/</guid>
+      <guid>https://blog.past.ovh/petsc-in-docker-container-shared-memory-solving-caught-signal-number-7-bus/</guid>
       <description>&lt;p&gt;Since the last May I have been using &lt;a href=&#34;https://underworld2.readthedocs.io/en/latest/&#34;&gt;Underworld2&lt;/a&gt; to run some thermo-mechanical models of rifted margins through time, using its nice Python API.
 More on that in a following post.&lt;/p&gt;
 &lt;p&gt;The suggested deployment for &amp;ldquo;usage on personal computers&amp;rdquo; of Underworld is via Docker.
@@ -130,7 +131,7 @@ Also, jupytext-converted notebooks are then copied in the model output directory
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Run with -malloc_debug to check if memory corruption is causing the crash.
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;application called MPI_Abort(MPI_COMM_WORLD, 59) - process 3
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The underlying cause was indeed trivial, however it took a while to troubleshoot:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://apasto.github.io/img/underworld_docker_shm.gif&#34; alt=&#34;gif: status of shared memory during test run&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.past.ovh/img/underworld_docker_shm.gif&#34; alt=&#34;gif: status of shared memory during test run&#34;&gt;&lt;/p&gt;
 &lt;p&gt;What I was running into is that the container was being allocated 64 MB of shared memory, by default (&lt;a href=&#34;https://docs.docker.com/engine/reference/run/#runtime-constraints-on-resources&#34;&gt;Docker run reference&lt;/a&gt;), which ran out when the number of processes increased.
 This resource provided to be quite helpful: &lt;a href=&#34;https://datawookie.dev/blog/2021/11/shared-memory-docker/&#34;&gt;datawookie.dev: Shared Memory &amp;amp; Docker&lt;/a&gt; [&lt;a href=&#34;https://web.archive.org/web/20230103130929/https://datawookie.dev/blog/2021/11/shared-memory-docker/&#34;&gt;archive.org archived link&lt;/a&gt;].&lt;/p&gt;
 &lt;p&gt;Increasing the amount of shared memory allocated to the container (&lt;code&gt;--shm-size&lt;/code&gt; option in &lt;code&gt;docker run&lt;/code&gt;) solved the issue.&lt;/p&gt;
@@ -141,11 +142,11 @@ This resource provided to be quite helpful: &lt;a href=&#34;https://datawookie.d
     
     <item>
       <title>A tool to isolate locally correlated signals between two arrays</title>
-      <link>https://apasto.github.io/a-tool-to-isolate-locally-correlated-signals-between-two-arrays/</link>
+      <link>https://blog.past.ovh/a-tool-to-isolate-locally-correlated-signals-between-two-arrays/</link>
       <pubDate>Sun, 06 Nov 2022 20:36:52 +0100</pubDate>
       
-      <guid>https://apasto.github.io/a-tool-to-isolate-locally-correlated-signals-between-two-arrays/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://apasto.github.io/img/logo_linreg.png&#34; alt=&#34;decorrelate-grids logo&#34;&gt;&lt;/p&gt;
+      <guid>https://blog.past.ovh/a-tool-to-isolate-locally-correlated-signals-between-two-arrays/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.past.ovh/img/logo_linreg.png&#34; alt=&#34;decorrelate-grids logo&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Consider some image-like data (in the form of a &amp;ldquo;grid&amp;rdquo;, a labelled 2-D array) which can be explained at least in part by another observable.
 Suppose that this relationship is linear - or can be approximated as such - and varies spatially, with a spatial scale that is larger than the grid interval.
 Pending some other assumptions, we can invert this relationship in discrete windows: a &lt;em&gt;rolling 2-D linear regression&lt;/em&gt;.&lt;/p&gt;
@@ -169,19 +170,19 @@ Being a prototype, the next changes are likely to break current behaviour and sy
     
     <item>
       <title>Lens Correction Profile for Tamron 135mm f/2.5 03B</title>
-      <link>https://apasto.github.io/lens-correction-profile-for-tamron-135mm-f/2.5-03b/</link>
+      <link>https://blog.past.ovh/lens-correction-profile-for-tamron-135mm-f/2.5-03b/</link>
       <pubDate>Tue, 22 Feb 2022 10:01:46 +0100</pubDate>
       
-      <guid>https://apasto.github.io/lens-correction-profile-for-tamron-135mm-f/2.5-03b/</guid>
+      <guid>https://blog.past.ovh/lens-correction-profile-for-tamron-135mm-f/2.5-03b/</guid>
       <description>&lt;p&gt;I have been looking for a vintage prime telephoto lens for a while, until I found this nice 135mm f/2.5 - not top notch, but close enough to more expensive similar vintage primes.
 Find more about it here: &lt;a href=&#34;https://www.pentaxforums.com/userreviews/tamron-adaptall-2-135mm-f-2-5-03b.html&#34;&gt;pentaxforums.com&lt;/a&gt; (&lt;a href=&#34;https://web.archive.org/web/20220222084506/https://www.pentaxforums.com/userreviews/tamron-adaptall-2-135mm-f-2-5-03b.html&#34;&gt;archive.org link&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;As expected with such a lens, chromatic aberration (CA) is an issue, especially wide open.
 Blue/red transverse CA is the most striking&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://apasto.github.io/img/lensprofile/135_ca_defringe_example_checkerboard.jpg&#34; alt=&#34;Before and after lens correction on checkerboard, upper right corner at f2.5&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.past.ovh/img/lensprofile/135_ca_defringe_example_checkerboard.jpg&#34; alt=&#34;Before and after lens correction on checkerboard, upper right corner at f2.5&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Above: checkerboard calibration chart.
 Before (left) and after (right) applying the lens profile corrections in ACR.
 Upper right corner of frame.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://apasto.github.io/img/lensprofile/135_ca_defringe_example_real.jpg&#34; alt=&#34;Before and after lens correction on a real world example against a bright background&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.past.ovh/img/lensprofile/135_ca_defringe_example_real.jpg&#34; alt=&#34;Before and after lens correction on a real world example against a bright background&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Above: real-world test: subject (a whip antenna) against a bright background, slightly off focus.
 Before (left) and after (right) applying the lens profile corrections in ACR.
 Upper right corner of frame.&lt;/p&gt;
@@ -198,10 +199,10 @@ An example batch call to &lt;code&gt;exiv2&lt;/code&gt; to set the metadata of t
     
     <item>
       <title>Bistatic passive radar with an RTLSDR</title>
-      <link>https://apasto.github.io/bistatic-passive-radar-with-an-rtlsdr/</link>
+      <link>https://blog.past.ovh/bistatic-passive-radar-with-an-rtlsdr/</link>
       <pubDate>Fri, 09 Jan 2015 14:00:00 +0100</pubDate>
       
-      <guid>https://apasto.github.io/bistatic-passive-radar-with-an-rtlsdr/</guid>
+      <guid>https://blog.past.ovh/bistatic-passive-radar-with-an-rtlsdr/</guid>
       <description>&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
       &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/vD6mceH40mg?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
     &lt;/div&gt;
@@ -213,15 +214,15 @@ The receiver is a RTL-SDR dongle bought in 2013 (on which you can read more abou
 &lt;p&gt;The output of the command line tool rtl_sdr was piped to baudline (following the &lt;a href=&#34;https://dm5ms.blogspot.com/2012/06/connecting-baudline-to-rtl-sdr.html&#34;&gt;useful information by DM5MS&lt;/a&gt;). The IQ sampling rate is 2 MHz; the transform is a complex STFT (size is 2048 samples, Blackman window).
 The video shows a 0.008x speed playback of 15 ms of actual recording.
 The reflected pulses become more time-local when using a shorter transform window size, as expected, e.g. 512 samples:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://apasto.github.io/img/passiveradar/baudline_smaller_window.png&#34; alt=&#34;waterfall-spectrogram-effect-of-smaller-window&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.past.ovh/img/passiveradar/baudline_smaller_window.png&#34; alt=&#34;waterfall-spectrogram-effect-of-smaller-window&#34;&gt;&lt;/p&gt;
 &lt;p&gt;The waveform seems a rather nice example of &lt;a href=&#34;https://www.radartutorial.eu/08.transmitters/Intrapulse%20Modulation.en.html&#34;&gt;pulse compression&lt;/a&gt; in action:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://apasto.github.io/img/passiveradar/baudline_with_waveform.png&#34; alt=&#34;waveform-and-waterfall-spectrogram-with-pulse-compression&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.past.ovh/img/passiveradar/baudline_with_waveform.png&#34; alt=&#34;waveform-and-waterfall-spectrogram-with-pulse-compression&#34;&gt;&lt;/p&gt;
 &lt;p&gt;The video was recorded from screen with VLC, the audio piped to stdout and saved, then audio and video were synced in Blender.&lt;/p&gt;
 &lt;h2 id=&#34;a-detection-attempt&#34;&gt;A detection attempt&lt;/h2&gt;
 &lt;p&gt;The direct-reflected delay of the event shown in the video is approx 278 µs, which would be compatible with a receiver-to-target distance of 42 km, in a simple 2D along-beam normal incidence model.
 In other words: assuming that the target lies on the extension of the line that connects the radar to the receiver.
 If we allow for the target to be slightly off beam, the geometry of the problem becomes less dull:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://apasto.github.io/img/passiveradar/passive_radar_geometry.png&#34; alt=&#34;sketch-of-the-geometry-of-2D-bistatic-radar&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.past.ovh/img/passiveradar/passive_radar_geometry.png&#34; alt=&#34;sketch-of-the-geometry-of-2D-bistatic-radar&#34;&gt;&lt;/p&gt;
 &lt;p&gt;In the sketch above (author: myself, license: CC0), we can see that the locus of reflectors satisfying the delay along the transmitter-plane-receiver T-P-R path (with respect to the T-R &lt;em&gt;direct path&lt;/em&gt;) is an ellipse, provided that the three points lie on a plane - since they do not, the solution becomes an ellipsoid.
 The trivial derivation is left as an exercise.&lt;/p&gt;
 &lt;p&gt;Let&amp;rsquo;s keep in mind that this off-angle cannot be extremely large: it is limited by the transmitter antenna beamwidth - unless the receiver is so close to the transmitting radar that all the transmitted pulses, even when the dish is pointing elsewhere, are above its noise floor (out of experience: it works).
@@ -230,7 +231,7 @@ Interestingly, also the backscatter of the target from these unusual aspects com
 Anyway, I must state that I have no formal knowledge on these topics. So you&amp;rsquo;d better take all this with a grain of salt ;) and go check it on a more reputable source.&lt;/p&gt;
 &lt;p&gt;I am quite happy to see this was featured on the &lt;a href=&#34;https://www.rtl-sdr.com/analyzing-radar-pulses-baudline-rtl-sdr/&#34;&gt;RTL-SDR.com blog on January 12, 2015&lt;/a&gt; and mentioned sometime later on &lt;a href=&#34;https://www.reddit.com/r/RTLSDR/comments/2zkwaq/comment/cpjwe1m/&#34;&gt;r/rtlsdr&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The image below shows a later attempt, with an L-band bi-quad antenna out in the field.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://apasto.github.io/img/passiveradar/kremenjak_biquad_passive_radar.jpg&#34; alt=&#34;later-field-setup-kremenjak-biquad-antenna&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.past.ovh/img/passiveradar/kremenjak_biquad_passive_radar.jpg&#34; alt=&#34;later-field-setup-kremenjak-biquad-antenna&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;further-work&#34;&gt;Further work&lt;/h2&gt;
 &lt;p&gt;This has been a nice and fun experiment, however it needs hand picking of events and measuring delays.
 Also, it does not leverage the advantages of pulse compression in any way.
@@ -244,10 +245,10 @@ Is anyone willing to?&lt;/p&gt;
     
     <item>
       <title>RSS feed to a dot matrix printer</title>
-      <link>https://apasto.github.io/rss-feed-to-a-dot-matrix-printer/</link>
+      <link>https://blog.past.ovh/rss-feed-to-a-dot-matrix-printer/</link>
       <pubDate>Tue, 07 Oct 2014 14:00:00 +0200</pubDate>
       
-      <guid>https://apasto.github.io/rss-feed-to-a-dot-matrix-printer/</guid>
+      <guid>https://blog.past.ovh/rss-feed-to-a-dot-matrix-printer/</guid>
       <description>&lt;p&gt;This little project has turned out as fun as it&amp;rsquo;s been noisy (rather).
 Not much to showcase, but I cannot find any reason to get rid of it either.&lt;/p&gt;
 &lt;p&gt;A bash script to turn an RSS news feed in escape-formatted dot-matrix printer text.
@@ -260,7 +261,8 @@ Or: a questionable waste of time, continuous-form paper, and ink ribbon.&lt;/p&g
 &lt;p&gt;Quoting the video caption:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Those escape sequences that look like line noise are Epson ESC/P control codes, to which my printer (a Citizen 120D+) is partially compliant.&lt;/p&gt;
-&lt;p&gt;Someday, somehow, I’ll turn all those sed calls in a nice awk script. Apart from syntax cleanliness, a big issue is reverse ordering the &lt;code&gt;title-desc-pubDate&lt;/code&gt; tuples so the newest headlines are printed last, both in the zero-time print and the updates. Feel free to edit.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Someday, somehow, I’ll turn all those sed calls in a nice awk script. Apart from syntax cleanliness, a big issue is reverse ordering the &lt;code&gt;title-desc-pubDate&lt;/code&gt; tuples so the newest headlines are printed last, both in the zero-time print and the updates. Feel free to edit.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;This is definitely not the right way to do it and catching all the bad shell scripting practices may be a interesting code review exercise, now.
 Anyway, this mess seems to be still working (see the comments on the YouTube video above).&lt;/p&gt;
 &lt;p&gt;More descriptive comments would have helped, particularly for all the escape codes (all those &lt;code&gt;\\e\\x&lt;/code&gt;-something), which are in the printers own ESC/P dialect (from its original spiral-bound manual, of which I only had the French version - &lt;a href=&#34;https://frinkiac.com/caption/S10E19/283899&#34;&gt;relevant Simpsons quote&lt;/a&gt;).
