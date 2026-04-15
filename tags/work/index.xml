@@ -15,6 +15,48 @@
     
     
     <item>
+      <title>Running Ubiquiti AirView in 2026</title>
+      <link>https://blog.past.ovh/running-ubiquiti-airview-in-2026/</link>
+      <pubDate>Wed, 15 Apr 2026 22:14:09 +0200</pubDate>
+      <author>alberto@past.ovh (Alberto Pastorutti)</author>
+      <guid>https://blog.past.ovh/running-ubiquiti-airview-in-2026/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.past.ovh/img/screenshot_airview.png&#34; alt=&#34;airview-screenshot&#34;&gt;&lt;/p&gt;
+&lt;p&gt;I happen to own more than one Ubiquiti Airgrid M5, a pair of which I am about to use in a point-to-point link - in 2026.
+The power budget is a factor on the far end of this link, and I am quite content with the 1.9-2.3W peak I have measured under stress.
+Cost has been a factor too, I bought these used for cheap. Lesson learned: factor in the effort involved in de-rusting and repainting their grid reflectors.&lt;/p&gt;
+&lt;p&gt;Then there is the &amp;rsquo;time tax&amp;rsquo;, since the side project these are meant to be used in has been 2.5 years in the making. But let&amp;rsquo;s not digress&amp;hellip;&lt;/p&gt;
+&lt;p&gt;Anyway, these can run the nice AirView spectrum analysis tool. Or at least they could, until I tried again, recently.&lt;/p&gt;
+&lt;p&gt;The way AirView is launched is by downloading a Java Web Start jnlp file (&lt;code&gt;airview.jnlp&lt;/code&gt;) from the AirOS Web UI.
+This, launched locally, pulls a &lt;code&gt;jar&lt;/code&gt; from the device - not directly one, as we&amp;rsquo;ll see in a moment.
+When trying to do this from my PC (using IcedTea 1.8.8 and openjdk 21.0.10, on Ubuntu 24.04), I got this back:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;net.sourceforge.jnlp.LaunchException: Fatal: Read Error: Could not read or parse the JNLP file. 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Trying the same from a Windows machine with JRE resulted in the same error.&lt;/p&gt;
+&lt;p&gt;Looking at the (quite short) XML in &lt;code&gt;airview.jnlp&lt;/code&gt;, there is a &lt;code&gt;codebase&lt;/code&gt; attribute pointing to &lt;code&gt;https://${DeviceIP}:443/${AirOsVersion}&lt;/code&gt;, then in a &lt;code&gt;resources&lt;/code&gt; tag: &lt;code&gt;&amp;lt;jar href=&amp;quot;airview.jar&amp;quot; main=&amp;quot;true&amp;quot; download=&amp;quot;eager&amp;quot; /&amp;gt;&lt;/code&gt;.
+However, trying to get e.g. this &lt;code&gt;https://1.2.3.4:443/251204.1815/airview.jar&lt;/code&gt; returns a 404 (also note the non-existent version subdirectory, the meaning of which I am unsure).
+On a shell on the device, calling &lt;code&gt;find / -name &amp;quot;*airview*&amp;quot;&lt;/code&gt;, finds &lt;code&gt;/usr/www/airview.jar.pack.gz&lt;/code&gt; - a gzipped and Pack200 compressed jar.&lt;/p&gt;
+&lt;p&gt;First thing first, we can &lt;code&gt;wget --no-check-certificate https://1.2.3.4/airview.jar.pack.gz&lt;/code&gt;.
+Then calling &lt;code&gt;gunzip airview.jar.pack.gz&lt;/code&gt; is not an issue.
+Now, it seems that Pack200 might be the culprit, given it was removed in Java 14: &lt;a href=&#34;https://docs.oracle.com/en/java/javase/12/tools/unpack200.html&#34;&gt;&lt;code&gt;unpack200&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Docker helps as a time machine: we can call unpack from an old JDK version.
+&lt;code&gt;openjdk&lt;/code&gt; is showing a &lt;a href=&#34;https://hub.docker.com/_/openjdk#deprecation-notice&#34;&gt;deprecation warning&lt;/a&gt; for legacy JDK builds, so I switched to the &lt;a href=&#34;https://hub.docker.com/_/eclipse-temurin&#34;&gt;eclipse-temurin&lt;/a&gt; images.&lt;/p&gt;
+&lt;p&gt;So, in the same dir where we gunzipped &lt;code&gt;airview.jar.pack.gz&lt;/code&gt; to &lt;code&gt;airview.jar.pack&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker run --rm -v &lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;pwd&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;:/data &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  -w /data eclipse-temurin:8 &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  unpack200 airview.jar.pack airview.jar
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This should produce an &lt;code&gt;airview.jar&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ file airview.jar
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;airview.jar: Java archive data (JAR) 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Which can be launched with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;java -cp airview.jar com.ubnt.app.AirViewer ubnt://1.2.3.4:18888
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now this will likely result in an error: the device will be found not to be in spectrum analysis mode (nothing listening on port 18888).
+Launching AirGrid the usual way (from the AirOS web UI, downloading the jnlp) worked out, after a bit of retries.&lt;/p&gt;
+&lt;p&gt;Footnote: AirGrid, AirView, AirOS (and any other I might have omitted) are trademarks of Ubiquiti Inc.&lt;/p&gt;
+</description>
+    </item>
+    
+    
+    
+    <item>
       <title>Flat vs standing mounting and CPU temperature, Fujitsu Futro S920</title>
       <link>https://blog.past.ovh/flat-vs-standing-mounting-and-cpu-temperature-fujitsu-futro-s920/</link>
       <pubDate>Sun, 07 Sep 2025 09:55:54 +0200</pubDate>

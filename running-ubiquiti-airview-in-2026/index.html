@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="apasto short notes">
+    
+    <link rel="shortcut icon" href="https://blog.past.ovh/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.min.css">
+
+    <link rel="canonical" href="https://blog.past.ovh/running-ubiquiti-airview-in-2026/" />
+    <title>Running Ubiquiti AirView in 2026</title>
+</head>
+<body><header id="banner">
+    <h2><a href="https://blog.past.ovh/">Alberto Pastorutti</a></h2>
+    <nav>
+        <ul>
+            <li>
+                <a href="/" title="posts">posts</a>
+            </li><li>
+                <a href="/about/" title="about">about</a>
+            </li><li>
+                <a href="/minimal_resume/" title="resume">resume</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main id="content">
+<article>
+    <header id="post-header">
+        <h1>Running Ubiquiti AirView in 2026</h1>
+        <div>
+                <time>April 15, 2026</time>
+            </div>
+    </header><p><img src="/img/screenshot_airview.png" alt="airview-screenshot"></p>
+<p>I happen to own more than one Ubiquiti Airgrid M5, a pair of which I am about to use in a point-to-point link - in 2026.
+The power budget is a factor on the far end of this link, and I am quite content with the 1.9-2.3W peak I have measured under stress.
+Cost has been a factor too, I bought these used for cheap. Lesson learned: factor in the effort involved in de-rusting and repainting their grid reflectors.</p>
+<p>Then there is the &rsquo;time tax&rsquo;, since the side project these are meant to be used in has been 2.5 years in the making. But let&rsquo;s not digress&hellip;</p>
+<p>Anyway, these can run the nice AirView spectrum analysis tool. Or at least they could, until I tried again, recently.</p>
+<p>The way AirView is launched is by downloading a Java Web Start jnlp file (<code>airview.jnlp</code>) from the AirOS Web UI.
+This, launched locally, pulls a <code>jar</code> from the device - not directly one, as we&rsquo;ll see in a moment.
+When trying to do this from my PC (using IcedTea 1.8.8 and openjdk 21.0.10, on Ubuntu 24.04), I got this back:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">net.sourceforge.jnlp.LaunchException: Fatal: Read Error: Could not read or parse the JNLP file. 
+</span></span></code></pre></div><p>Trying the same from a Windows machine with JRE resulted in the same error.</p>
+<p>Looking at the (quite short) XML in <code>airview.jnlp</code>, there is a <code>codebase</code> attribute pointing to <code>https://${DeviceIP}:443/${AirOsVersion}</code>, then in a <code>resources</code> tag: <code>&lt;jar href=&quot;airview.jar&quot; main=&quot;true&quot; download=&quot;eager&quot; /&gt;</code>.
+However, trying to get e.g. this <code>https://1.2.3.4:443/251204.1815/airview.jar</code> returns a 404 (also note the non-existent version subdirectory, the meaning of which I am unsure).
+On a shell on the device, calling <code>find / -name &quot;*airview*&quot;</code>, finds <code>/usr/www/airview.jar.pack.gz</code> - a gzipped and Pack200 compressed jar.</p>
+<p>First thing first, we can <code>wget --no-check-certificate https://1.2.3.4/airview.jar.pack.gz</code>.
+Then calling <code>gunzip airview.jar.pack.gz</code> is not an issue.
+Now, it seems that Pack200 might be the culprit, given it was removed in Java 14: <a href="https://docs.oracle.com/en/java/javase/12/tools/unpack200.html"><code>unpack200</code></a>.</p>
+<p>Docker helps as a time machine: we can call unpack from an old JDK version.
+<code>openjdk</code> is showing a <a href="https://hub.docker.com/_/openjdk#deprecation-notice">deprecation warning</a> for legacy JDK builds, so I switched to the <a href="https://hub.docker.com/_/eclipse-temurin">eclipse-temurin</a> images.</p>
+<p>So, in the same dir where we gunzipped <code>airview.jar.pack.gz</code> to <code>airview.jar.pack</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run --rm -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/data <span class="se">\
+</span></span></span><span class="line"><span class="cl">  -w /data eclipse-temurin:8 <span class="se">\
+</span></span></span><span class="line"><span class="cl">  unpack200 airview.jar.pack airview.jar
+</span></span></code></pre></div><p>This should produce an <code>airview.jar</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">$ file airview.jar
+</span></span><span class="line"><span class="cl">airview.jar: Java archive data (JAR) 
+</span></span></code></pre></div><p>Which can be launched with:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">java -cp airview.jar com.ubnt.app.AirViewer ubnt://1.2.3.4:18888
+</span></span></code></pre></div><p>Now this will likely result in an error: the device will be found not to be in spectrum analysis mode (nothing listening on port 18888).
+Launching AirGrid the usual way (from the AirOS web UI, downloading the jnlp) worked out, after a bit of retries.</p>
+<p>Footnote: AirGrid, AirView, AirOS (and any other I might have omitted) are trademarks of Ubiquiti Inc.</p>
+</article>
+<h4>Tags:</h4>
+ 
+<ul>
+   <li>
+    <a href="https://blog.past.ovh/tags/hardware/">hardware</a>
+  </li> <li>
+    <a href="https://blog.past.ovh/tags/remotecam/">remotecam</a>
+  </li></ul>
+
+
+
+        </main><footer id="footer">
+    Copyright © 2026 Alberto Pastorutti &middot; 
+</footer>
+</body>
+</html>
