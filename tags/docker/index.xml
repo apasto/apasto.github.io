@@ -15,6 +15,30 @@
     
     
     <item>
+      <title>Solar eclipse pattern on a PV panel</title>
+      <link>https://blog.past.ovh/solar-eclipse-pattern-on-a-pv-panel/</link>
+      <pubDate>Fri, 28 Aug 2026 21:39:58 +0200</pubDate>
+      <author>alberto@past.ovh (Alberto Pastorutti)</author>
+      <guid>https://blog.past.ovh/solar-eclipse-pattern-on-a-pv-panel/</guid>
+      <description>&lt;p&gt;I happen to have deployed a solar panel at a remote site, a feat I plan to write about in detail eventually.
+Before I get around to writing a proper post serie covering the story, let me just tell you that it feels like having my very own &lt;em&gt;little satellite that could&lt;/em&gt; (sturdily guyed to the ground!).&lt;/p&gt;
+&lt;p&gt;So, my panel has experienced a partial solar eclipse: the &lt;a href=&#34;https://en.wikipedia.org/wiki/Solar_eclipse_of_August_12,_2026&#34;&gt;Solar eclipse of August 12, 2026&lt;/a&gt;.
+This of course does not make it special in any way :)&lt;/p&gt;
+&lt;p&gt;There (roughly N45 E13) the eclipse more or less coincided with the sunset (20:19 CEST), so I wondered if the pattern of PV voltage through time was significantly differed from the surrounding days.&lt;/p&gt;
+&lt;p&gt;Here it is:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.past.ovh/img/PV_eclipse_20260812.png&#34; alt=&#34;plot of PV voltage vs time&#34;&gt;&lt;/p&gt;
+&lt;p&gt;The overall sunset trend is clearly visible, with some interesting features and some weather variability.
+The eclipse seems to have significantly changed the sunset and twilight voltage pattern.
+Note that the sun set behind clouds, so there was significant scattering.
+Unfortunately, my only IP camera on-site at the time was pointing east.&lt;/p&gt;
+&lt;p&gt;There is also a peculiar systematic step before each sunset, followed by a plateau and that twilight drop-off ramp.
+Note that at this time of the year the sun is setting behind the south-facing PV panel, so some local effect (shadows and/or backscattering) might be involved.&lt;/p&gt;
+</description>
+    </item>
+    
+    
+    
+    <item>
       <title>Running Ubiquiti AirView in 2026</title>
       <link>https://blog.past.ovh/running-ubiquiti-airview-in-2026/</link>
       <pubDate>Wed, 15 Apr 2026 22:14:09 +0200</pubDate>
