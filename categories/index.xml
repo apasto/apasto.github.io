@@ -23,7 +23,7 @@
 Before I get around to writing a proper post serie covering the story, let me just tell you that it feels like having my very own &lt;em&gt;little satellite that could&lt;/em&gt; (sturdily guyed to the ground!).&lt;/p&gt;
 &lt;p&gt;So, my panel has experienced a partial solar eclipse: the &lt;a href=&#34;https://en.wikipedia.org/wiki/Solar_eclipse_of_August_12,_2026&#34;&gt;Solar eclipse of August 12, 2026&lt;/a&gt;.
 This of course does not make it special in any way :)&lt;/p&gt;
-&lt;p&gt;There (roughly N45 E13) the eclipse more or less coincided with the sunset (20:19 CEST), so I wondered if the pattern of PV voltage through time was significantly differed from the surrounding days.&lt;/p&gt;
+&lt;p&gt;There (roughly N45 E13) the eclipse more or less coincided with the sunset (20:19 CEST), so I wondered if the pattern of PV voltage through time differed from that of the surrounding days.&lt;/p&gt;
 &lt;p&gt;Here it is:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://blog.past.ovh/img/PV_eclipse_20260812.png&#34; alt=&#34;plot of PV voltage vs time&#34;&gt;&lt;/p&gt;
 &lt;p&gt;The overall sunset trend is clearly visible, with some interesting features and some weather variability.
