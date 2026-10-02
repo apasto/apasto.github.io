@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="apasto short notes">
+    
+    <link rel="shortcut icon" href="https://blog.past.ovh/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.min.css">
+
+    <link rel="canonical" href="https://blog.past.ovh/virtualbox-signed-kernel-modules-and-secure-boot/" />
+    <title>Virtualbox signed kernel modules and secure boot</title>
+</head>
+<body><header id="banner">
+    <h2><a href="https://blog.past.ovh/">Alberto Pastorutti</a></h2>
+    <nav>
+        <ul>
+            <li>
+                <a href="/" title="posts">posts</a>
+            </li><li>
+                <a href="/about/" title="about">about</a>
+            </li><li>
+                <a href="/minimal_resume/" title="resume">resume</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main id="content">
+<article>
+    <header id="post-header">
+        <h1>Virtualbox signed kernel modules and secure boot</h1>
+        <div>
+                <time>October 31, 2016</time>
+            </div>
+    </header><p>While migrating to a new laptop, I incurred in this <em>Series of Unfortunate Mishaps</em>
+after installing Oracle Virtualbox on Ubuntu 16.04:</p>
+<ol>
+<li>
+<p><code>vboxdrv</code>, <code>vboxnetadp</code>, <code>vboxnetflt</code>, <code>vboxpci</code> are unsigned kernel modules,
+which are not allowed to run with Secure Boot enabled.
+Avoiding the easy way out of disabling it, I have followed <a href="https://href.li/?http://askubuntu.com/a/768310/184035">this answer</a> by askubuntu user Majal;</p>
+</li>
+<li>
+<p>But I could not register the key I had signed those modules with, due to <a href="https://href.li/?https://github.com/rhinstaller/shim/issues/55">this known issue</a> with MOK enrolment&hellip;</p>
+</li>
+<li>
+<p>&hellip; which was fixed by <a href="https://github.com/rhboot/shim/pull/60">this PR</a>. Which, as of today 2016-10-31, it yet to be merged and pulled downstream by Ubuntu.</p>
+</li>
+<li>
+<p>Since I could not wait, I followed <a href="https://href.li/?http://stackoverflow.com/a/38279415/3146014">this heaven-sent answer</a>, by stackoverflow user adempewolff.</p>
+</li>
+</ol>
+<p>Now keeping this (nothing more than a sorted list of links) for future reference seems like a good idea.</p>
+</article>
+<h4>Tags:</h4>
+ 
+<ul>
+   <li>
+    <a href="https://blog.past.ovh/tags/linux/">linux</a>
+  </li> <li>
+    <a href="https://blog.past.ovh/tags/fixes/">fixes</a>
+  </li></ul>
+
+
+
+        </main><footer id="footer">
+    Copyright © 2026 Alberto Pastorutti &middot; 
+</footer>
+</body>
+</html>
