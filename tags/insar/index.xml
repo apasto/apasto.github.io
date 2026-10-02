@@ -296,6 +296,59 @@ Avoiding the easy way out of disabling it, I have followed &lt;a href=&#34;https
     
     
     <item>
+      <title>Using an RTLSDR to log GSM900 whole-band RMS power</title>
+      <link>https://blog.past.ovh/using-an-rtlsdr-to-log-gsm900-whole-band-rms-power/</link>
+      <pubDate>Wed, 22 Apr 2015 14:11:33 +0000</pubDate>
+      <author>alberto@past.ovh (Alberto Pastorutti)</author>
+      <guid>https://blog.past.ovh/using-an-rtlsdr-to-log-gsm900-whole-band-rms-power/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.past.ovh/img/gsm900/gsm900_allserie.png&#34; alt=&#34;time-power plot of 4 days of GSM900 downlink&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;A 4-day long power log of the GSM900 downlink. Black: raw data points, red: 1 hour moving average, blue: after LP filter at 12 hours.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Summary: I measured the average power (in non-calibrated dBFS) across the whole GSM900 band,
+using an rtl-sdr, &lt;a href=&#34;https://github.com/keenerd/rtl-sdr&#34;&gt;&lt;code&gt;rtl_power&lt;/code&gt;&lt;/a&gt;
+and &lt;a href=&#34;http://kmkeen.com/rtl-power/&#34;&gt;this awk script&lt;/a&gt; from Kyle Keen (2026 edit: archived link &lt;a href=&#34;https://web.archive.org/web/20240212211722/http://kmkeen.com/rtl-power/&#34;&gt;here&lt;/a&gt;).
+The power shows a daily and sub-daily periodicity, which I assume is mostly due
+to variation in cell traffic trough time (to which the protocol duty cycle is proportional).&lt;/p&gt;
+&lt;p&gt;One of the most interesting aspects that emerges from capturing and plotting a day-long waterfall plot
+(TODO: a post from 2013, that I have yet to migrate to this blog)
+is periodicity over time of the power spectral density in certain bands,
+which is more noticeable in the GSM900 downlink (from the cell base station to the phone)
+than anywhere else.
+This useful awk one-liner (&lt;a href=&#34;https://web.archive.org/web/20240212211722/http://kmkeen.com/rtl-power/&#34;&gt;credits&lt;/a&gt;) makes it possible:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;awk &lt;span class=&#34;s1&#34;&gt;&amp;#39;BEGIN {t=0} {if (t==0) {t=$2; n=0; s=0}; if (t==$2) {s+=$7; n++} else {print s/n; t=0}}&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;which in practice integrates into a pipe from &lt;code&gt;rtl_power&lt;/code&gt; like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;rtl_power -f 925M:965M:2M -g &lt;span class=&#34;m&#34;&gt;46&lt;/span&gt; -i &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; -p -21 &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;awk &lt;span class=&#34;s1&#34;&gt;&amp;#39;BEGIN {t=0} {if (t==0) {t=$2; n=0; s=0}; if (t==$2) {s+=$7; n++} else {print s/int s/n; t=0; fflush()}}&amp;#39;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cat &amp;gt;&amp;gt; &lt;span class=&#34;nv&#34;&gt;$LOGFILE&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://blog.past.ovh/img/gsm900/20141024_1422_gr.png&#34; alt=&#34;time-power plot of 36 hours&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Zoom-in on 36 hours of recording, covering a Thursday and part of a Friday&amp;quot;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;At this point, writing this post (started at the end of October) got bogged down in trying
+to make the conjectures &amp;ldquo;robust&amp;rdquo; enough to provide a plausible explanation for the phenomenon,
+or at least enough to make them decent for this blog.
+In short: I think we are seeing the superimposed effects of &lt;strong&gt;propagation&lt;/strong&gt;, &lt;strong&gt;distance&lt;/strong&gt;, and &lt;strong&gt;traffic&lt;/strong&gt;,
+and some other lesser order effects.&lt;/p&gt;
+&lt;p&gt;To which can we attribute most of the variations seen here to?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Propagation&lt;/strong&gt; is affected by water absorption (so-called rain fade), which is minimal at 900 MHz, so I deem it close to negligible;
+for &lt;strong&gt;distance&lt;/strong&gt; I wrongly tought that the base station could be putting out higher power to
+reach farther devices - this seemed plausible, but in GSM that is a capability of the mobile terminal only).
+Then &lt;strong&gt;traffic&lt;/strong&gt;. That is: channel congestion (density of packets in time?).
+Indeed, the protocol&amp;rsquo;s duty cycle approaches 100% as the channel gets closer to saturation.
+In support of this, I can only cite &lt;a href=&#34;https://www.reddit.com/r/RTLSDR/comments/2je4z7/comment/clchlrp/&#34;&gt;this comment&lt;/a&gt; from Reddit r/rtlsdr,
+as I must admit I have neither the desire, time, nor skills to dive into primary sources right now.&lt;/p&gt;
+&lt;p&gt;Below is the periodogram for the longer recording.
+It might not be the most suitable tool for analyzing this time series.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.past.ovh/img/gsm900/periodogram_201411.png&#34; alt=&#34;periodogram&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Periodogram for the second recording (186 hours, QtiPlot).&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.past.ovh/img/gsm900/gsm900_7d.png&#34; alt=&#34;time-power plot of 7 days of GSM900 downlink&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Second series: blue points, red 1-hour moving average.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Author&amp;rsquo;s note: I migrated this post from 2015 in 2026, from the Wordpress.com blog I had back then.
+Everything except the summary was written in Italian.
+It went trough a round of LLM translation (Gemini Flash 3.6), and then reviewed.&lt;/p&gt;
+</description>
+    </item>
+    
+    
+    
+    <item>
       <title>Bistatic passive radar with an RTLSDR</title>
       <link>https://blog.past.ovh/bistatic-passive-radar-with-an-rtlsdr/</link>
       <pubDate>Fri, 09 Jan 2015 14:00:00 +0100</pubDate>

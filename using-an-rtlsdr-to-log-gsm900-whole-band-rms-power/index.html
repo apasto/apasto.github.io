@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="apasto short notes">
+    
+    <link rel="shortcut icon" href="https://blog.past.ovh/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.min.css">
+
+    <link rel="canonical" href="https://blog.past.ovh/using-an-rtlsdr-to-log-gsm900-whole-band-rms-power/" />
+    <title>Using an RTLSDR to log GSM900 whole-band RMS power</title>
+</head>
+<body><header id="banner">
+    <h2><a href="https://blog.past.ovh/">Alberto Pastorutti</a></h2>
+    <nav>
+        <ul>
+            <li>
+                <a href="/" title="posts">posts</a>
+            </li><li>
+                <a href="/about/" title="about">about</a>
+            </li><li>
+                <a href="/minimal_resume/" title="resume">resume</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main id="content">
+<article>
+    <header id="post-header">
+        <h1>Using an RTLSDR to log GSM900 whole-band RMS power</h1>
+        <div>
+                <time>April 22, 2015</time>
+            </div>
+    </header><p><img src="/img/gsm900/gsm900_allserie.png" alt="time-power plot of 4 days of GSM900 downlink"></p>
+<p><em>A 4-day long power log of the GSM900 downlink. Black: raw data points, red: 1 hour moving average, blue: after LP filter at 12 hours.</em></p>
+<p>Summary: I measured the average power (in non-calibrated dBFS) across the whole GSM900 band,
+using an rtl-sdr, <a href="https://github.com/keenerd/rtl-sdr"><code>rtl_power</code></a>
+and <a href="http://kmkeen.com/rtl-power/">this awk script</a> from Kyle Keen (2026 edit: archived link <a href="https://web.archive.org/web/20240212211722/http://kmkeen.com/rtl-power/">here</a>).
+The power shows a daily and sub-daily periodicity, which I assume is mostly due
+to variation in cell traffic trough time (to which the protocol duty cycle is proportional).</p>
+<p>One of the most interesting aspects that emerges from capturing and plotting a day-long waterfall plot
+(TODO: a post from 2013, that I have yet to migrate to this blog)
+is periodicity over time of the power spectral density in certain bands,
+which is more noticeable in the GSM900 downlink (from the cell base station to the phone)
+than anywhere else.
+This useful awk one-liner (<a href="https://web.archive.org/web/20240212211722/http://kmkeen.com/rtl-power/">credits</a>) makes it possible:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">awk <span class="s1">&#39;BEGIN {t=0} {if (t==0) {t=$2; n=0; s=0}; if (t==$2) {s+=$7; n++} else {print s/n; t=0}}&#39;</span>
+</span></span></code></pre></div><p>which in practice integrates into a pipe from <code>rtl_power</code> like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rtl_power -f 925M:965M:2M -g <span class="m">46</span> -i <span class="m">5</span> -p -21 <span class="p">|</span>
+</span></span><span class="line"><span class="cl">awk <span class="s1">&#39;BEGIN {t=0} {if (t==0) {t=$2; n=0; s=0}; if (t==$2) {s+=$7; n++} else {print s/int s/n; t=0; fflush()}}&#39;</span> <span class="p">|</span>
+</span></span><span class="line"><span class="cl">cat &gt;&gt; <span class="nv">$LOGFILE</span>
+</span></span></code></pre></div><p><img src="/img/gsm900/20141024_1422_gr.png" alt="time-power plot of 36 hours"></p>
+<p><em>Zoom-in on 36 hours of recording, covering a Thursday and part of a Friday&quot;</em></p>
+<p>At this point, writing this post (started at the end of October) got bogged down in trying
+to make the conjectures &ldquo;robust&rdquo; enough to provide a plausible explanation for the phenomenon,
+or at least enough to make them decent for this blog.
+In short: I think we are seeing the superimposed effects of <strong>propagation</strong>, <strong>distance</strong>, and <strong>traffic</strong>,
+and some other lesser order effects.</p>
+<p>To which can we attribute most of the variations seen here to?</p>
+<p><strong>Propagation</strong> is affected by water absorption (so-called rain fade), which is minimal at 900 MHz, so I deem it close to negligible;
+for <strong>distance</strong> I wrongly tought that the base station could be putting out higher power to
+reach farther devices - this seemed plausible, but in GSM that is a capability of the mobile terminal only).
+Then <strong>traffic</strong>. That is: channel congestion (density of packets in time?).
+Indeed, the protocol&rsquo;s duty cycle approaches 100% as the channel gets closer to saturation.
+In support of this, I can only cite <a href="https://www.reddit.com/r/RTLSDR/comments/2je4z7/comment/clchlrp/">this comment</a> from Reddit r/rtlsdr,
+as I must admit I have neither the desire, time, nor skills to dive into primary sources right now.</p>
+<p>Below is the periodogram for the longer recording.
+It might not be the most suitable tool for analyzing this time series.</p>
+<p><img src="/img/gsm900/periodogram_201411.png" alt="periodogram"></p>
+<p><em>Periodogram for the second recording (186 hours, QtiPlot).</em></p>
+<p><img src="/img/gsm900/gsm900_7d.png" alt="time-power plot of 7 days of GSM900 downlink"></p>
+<p><em>Second series: blue points, red 1-hour moving average.</em></p>
+<p>Author&rsquo;s note: I migrated this post from 2015 in 2026, from the Wordpress.com blog I had back then.
+Everything except the summary was written in Italian.
+It went trough a round of LLM translation (Gemini Flash 3.6), and then reviewed.</p>
+</article>
+<h4>Tags:</h4>
+ 
+<ul>
+   <li>
+    <a href="https://blog.past.ovh/tags/rtlsdr/">rtlsdr</a>
+  </li></ul>
+
+
+
+        </main><footer id="footer">
+    Copyright © 2026 Alberto Pastorutti &middot; 
+</footer>
+</body>
+</html>
