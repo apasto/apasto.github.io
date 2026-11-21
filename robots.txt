@@ -1,1 +1,8 @@
+# Allow: Internet Archive (Wayback Machine)
+User-agent: ia_archiver
+Allow: /
+
+# Block: catch-all
 User-agent: *
+Disallow: /
+
