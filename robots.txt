@@ -6,3 +6,5 @@ Allow: /
 User-agent: *
 Disallow: /
 
+Sitemap: https://blog.past.ovh/sitemap.xml
+
